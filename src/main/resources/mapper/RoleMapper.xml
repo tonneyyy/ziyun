@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.mapper.RoleMapper">
+
+  <resultMap id="BaseResultMap" type="com.hxzy.entity.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+    <result column="authority" jdbcType="VARCHAR" property="authority" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+
+  <select id="findOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  *
+    from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <insert id="insert" parameterType="com.hxzy.entity.Role" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role (id, rolename, authority, state)
+    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{authority,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+
+  <update id="updateSelective" parameterType="com.hxzy.entity.Role">
+    update sys_role
+    <set>
+      <if test="rolename != null">
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="authority != null">
+        authority = #{authority,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="update" parameterType="com.hxzy.entity.Role">
+    update sys_role
+    set rolename = #{rolename,jdbcType=VARCHAR},
+      authority = #{authority,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Role">
+     select * from sys_role  order by id
+  </select>
+
+
+  <select id="existRoleName" parameterType="java.lang.String" resultType="int">
+     select count(*)
+     from sys_role
+     where rolename=#{value}
+  </select>
+
+
+  <select id="existAuthority" parameterType="java.lang.String" resultType="int">
+     select count(*)
+     from sys_role
+     where authority=#{value}
+  </select>
+
+  <select id="roleOwnMenuId" parameterType="int" resultType="int">
+    select menuId
+    from sys_role_menu
+    where roleId=#{roleId}
+  </select>
+
+  <delete id="deleteRoleMenu" parameterType="int" >
+     delete from sys_role_menu  where roleId=#{roleId}
+  </delete>
+
+  <insert id="savePermission" >
+      insert into sys_role_menu(roleId,menuId) values
+      <!-- 批量插入需要循环标签的-->
+      <foreach collection="list" item="p" separator=",">
+         (#{roleId}, #{p})
+      </foreach>
+  </insert>
+
+
+
+  <insert id="addUserPermission" >
+      insert into sys_role_user(userId,roleId) values
+      <foreach collection="list" item="p" separator=",">
+        (#{p}, #{roleId})
+      </foreach>
+  </insert>
+
+  <delete id="removeUserPermission" >
+    delete from sys_role_user where  roleId=#{roleId}  and
+      userId in
+        <foreach collection="list" item="p"  open="(" separator="," close=")">
+           #{p}
+        </foreach>
+
+  </delete>
+
+
+</mapper>
