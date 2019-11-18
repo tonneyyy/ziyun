@@ -1,5 +1,4 @@
-
-
+<#assign ctx="${request.contextPath}">
 <li class="active">
     <a href="#">
         <i class="fa fa-home"></i>
@@ -19,6 +18,15 @@
             <a class="J_menuItem" href="${ctx}/admin/menu/search" data-index="2">菜单管理</a>
         </li>
 
+        <li>
+            <a class="J_menuItem" href="${ctx}/admin/student/search" data-index="2">学生管理</a>
+        </li>
+        <li>
+            <a class="J_menuItem" href="${ctx}/admin/classes/search" data-index="2">班级管理</a>
+        </li>
+        <li>
+            <a class="J_menuItem" href="${ctx}/admin/major/search" data-index="2">专业管理</a>
+        </li>
 
     </ul>
 </li>
