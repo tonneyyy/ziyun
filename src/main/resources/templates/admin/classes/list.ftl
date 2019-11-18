@@ -55,7 +55,6 @@
                         <button type="button" class="btn btn-primary" id="btnAdd">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
                         <button type="button" class="btn btn-success" id="btnOwnTeacher">分配教师</button>
-                        <button type="button" class="btn btn-danger" id="btnRoleMenu">分配教师权限</button>
                     </form>
                 </div>
             </div>
