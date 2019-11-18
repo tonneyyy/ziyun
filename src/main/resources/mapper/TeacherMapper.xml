@@ -166,10 +166,4 @@
         from `teacher`
         where name=#{name}
     </select>
-
-    <select id="findByName" parameterType="java.lang.String" resultType="com.hxzy.entity.Teacher">
-        SELECT *
-        FROM `teacher`
-        WHERE `name`=#{name}
-    </select>
 </mapper>

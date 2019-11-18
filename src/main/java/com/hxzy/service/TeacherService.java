@@ -1,11 +1,8 @@
 package com.hxzy.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.service.BaseService;
 import com.hxzy.entity.Teacher;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * describe:
@@ -20,6 +17,4 @@ public interface TeacherService extends BaseService<Teacher,Integer> {
      * @return
      */
     JSONObject existName(Teacher teacher);
-
-    ResponseMessage login(HttpSession session, Teacher teacher);
 }

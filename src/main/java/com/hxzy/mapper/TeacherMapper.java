@@ -6,6 +6,4 @@ import com.hxzy.entity.Teacher;
 public interface TeacherMapper extends BaseMapper<Teacher,Integer> {
 
     int exisName(String name);
-
-    Teacher findByName(String name);
 }

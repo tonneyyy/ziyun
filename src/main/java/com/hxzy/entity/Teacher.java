@@ -16,7 +16,7 @@ public class Teacher {
 
     private String password;
 
-    private String teachknowledge;
+    private String teachKnowledge;
 
     private String mobile;
 

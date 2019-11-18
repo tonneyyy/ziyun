@@ -3,10 +3,12 @@ package com.hxzy.controller.admin;
 import com.alibaba.fastjson.JSONObject;
 import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
+import com.hxzy.common.search.PageSearch;
 import com.hxzy.common.validator.ValidatorImpl;
 import com.hxzy.common.validator.ValidatorResult;
 import com.hxzy.entity.Teacher;
 import com.hxzy.service.TeacherService;
+import com.hxzy.vo.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +42,28 @@ public class TeacherController {
     }
 
     /**
+     * ajax分页查询请求
+     * @param pageSearch
+     * @return
+     */
+    @ResponseBody
+    @PostMapping(value = "/teacher/data")
+    public ResponseMessage ajaxData(PageSearch pageSearch){
+        //分页用的数据
+        ResultData rs= this.teacherService.searchPage(pageSearch);
+        //再次组装，添加自定义返回码
+        ResponseMessage responseMessage=new ResponseMessage(ResponseCodeEnum.SUCCESS,rs);
+
+        return  responseMessage;
+    }
+
+    /**
      * 判断名称是否存在
      * @param teacher
      * @return
      */
     @ResponseBody
-    @PostMapping(value = "/teacher/exist/username")
+    @PostMapping(value = "/teacher/exist/name")
     public JSONObject ajaxExistName(Teacher teacher){
         return this.teacherService.existName(teacher);
     }
