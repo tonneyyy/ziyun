@@ -109,7 +109,7 @@
                         <button type="button" class="btn btn-info" id="btnSelect" style="margin-left: 10px">查询</button>
                         <button type="button" class="btn btn-success" id="btnAdd" style="margin-left: 10px">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit" style="margin-left: 10px">编辑</button>
-                        <button type="button" class="btn btn-danger" id="btnEdit">删除</button>
+                        <button type="button" class="btn btn-danger" id="btnEdit" style="margin-left: 10px">删除</button>
                     </form>
                 </div>
             </div>

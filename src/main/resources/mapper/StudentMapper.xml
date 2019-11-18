@@ -234,7 +234,6 @@
       and s.mobile like concat('%',#{mobile},'%')
     </if>
 
-
     <if test='sex == "男" or sex == "女"' >
       and s.sex =#{sex}
     </if>
@@ -244,7 +243,16 @@
     </if>
 
     order by id
+
   </select>
+
+
+  <delete id="batchDeletion" >
+    delete from `student` where id in
+    <foreach collection="list" item="i"  open="(" separator="," close=")">
+      #{i}
+    </foreach>
+  </delete>
 
 
 </mapper>

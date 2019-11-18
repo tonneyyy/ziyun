@@ -6,4 +6,5 @@ import com.hxzy.entity.Student;
 
 public interface StudentService extends BaseService<Student,Integer> {
     ResponseMessage saveStudent(Student student);
+
 }
