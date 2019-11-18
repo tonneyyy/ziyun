@@ -105,7 +105,7 @@
     select u.id,u.name,u.sex
     from `teacher` AS u
     where   not EXISTS(  select ru.teacherId from teacher_classes  ru
-    where ru.classesId=#{classesId} and  ru.teacherId=u.id)
+    where ru.classesId=#{classesId} and  ru.teacherId=u.id )
   </select >
 
   <delete id="saveRemove">

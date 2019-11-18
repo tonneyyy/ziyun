@@ -53,12 +53,6 @@ public class ClassesController {
     @PostMapping(value = "/classes/save")
     public ResponseMessage sava(Classes classes,@RequestParam("openingDate") String date){
         boolean result = false;
-//        Classes classes = new Classes();
-//        classes.setId(classesVO.getId());
-//        classes.setMarjorid(classesVO.getMarjorid());
-//        classes.setName(classesVO.getName());
-//        classes.setRules(classesVO.getRules());
-//        classes.setStartnum(classesVO.getStartnum());
         Date date1 = DateUtil.stringToDate(date);
         classes.setOpeningdate(date1);
         if(classes.getId() == null || classes.getId() == 0){
@@ -112,7 +106,6 @@ public class ClassesController {
     public ResponseMessage saveAdd(@RequestParam("classesId") int classesId,@RequestParam("permsList[]") List<Integer> permsList){
         return this.classesService.saveAdd(classesId,permsList);
     }
-
 
 
 }
