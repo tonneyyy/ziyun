@@ -61,11 +61,6 @@ function initownUserTable() {
                 sortable: true
             },
             {
-                field: 'teachknowledge',
-                title:'所带专业',
-                valign: 'middle'
-            },
-            {
                 field: 'sex',
                 title:'性别',
                 valign: 'middle'
@@ -75,16 +70,16 @@ function initownUserTable() {
                 title:'学历',
                 formatter:function (value,row,index) {
                     if(value==1){
-                        return "<span class=\"label label-primary\">上架</span>"
+                        return "<span class=\"label label-primary\">本科</span>"
                     }
                     if(value==2){
-                        return "专科"
+                        return "<span class=\"label label-primary\">专科</span>"
                     }
                     if(value == 3){
-                        return "专科以下"
+                        return "<span class=\"label label-primary\">专科以下</span>"
                     }
                     if(value == 4){
-                        return "研究生"
+                        return "<span class=\"label label-primary\">研究生</span>"
                     }
                 },
                 valign: 'middle'
@@ -92,6 +87,15 @@ function initownUserTable() {
             {
                 field: 'state',
                 title:'状态',
+                formatter:function (value,row,index) {
+                    if(value == 1){
+                        return "<span class=\"label label-primary\">正常</span>"
+                    }if(value==2){
+                        return "<span class=\"label label-primary\">休假</span>"
+                    }if(value == 3){
+                        return "<span class=\"label label-primary\">离职</span>"
+                    }
+                },
                 valign: 'middle'
             },
         ]
