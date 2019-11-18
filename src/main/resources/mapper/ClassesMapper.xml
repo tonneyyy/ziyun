@@ -93,7 +93,7 @@
   </select>
 
   <select id="ownTeacher" parameterType="int" resultType="com.hxzy.entity.Teacher">
-    SELECT  u.id,u.name,u.sex
+    SELECT  u.id,u.name,u.teachKnowledge,u.sex,u.education,u.state
     FROM  teacher_classes AS ru
     INNER JOIN `teacher` AS u
     ON ru.teacherId = u.id
@@ -102,7 +102,7 @@
 
   <!--根据角色id 查询没有角色id的用户有哪些 -->
   <select id="noOwnTeacher" parameterType="int" resultType="com.hxzy.entity.Teacher">
-    select u.id,u.name,u.sex
+    select u.id,u.name,u.teachKnowledge,u.sex,u.education,u.state
     from `teacher` AS u
     where   not EXISTS(  select ru.teacherId from teacher_classes  ru
     where ru.classesId=#{classesId} and  ru.teacherId=u.id )
