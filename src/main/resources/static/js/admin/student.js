@@ -36,22 +36,22 @@ function initFormValidator(){
         },
         fields: {
             //表单中的  元素的 name 进行设定它验证规则
-            majorId:{
-                validators: {
-                    greaterThan: {
-                        value : 1,
-                        message : '请选择专业'
-                    },
-                }
-            },  //验证结束
-            classesId:{
-                validators: {
-                    greaterThan: {
-                        value : 1,
-                        message : '请选择班级'
-                    },
-                }
-            },  //验证结束
+            // majorId:{
+            //     validators: {
+            //         greaterThan: {
+            //             value : 1,
+            //             message : '请选择专业'
+            //         },
+            //     }
+            // },  //验证结束
+            // classesId:{
+            //     validators: {
+            //         greaterThan: {
+            //             value : 1,
+            //             message : '请选择班级'
+            //         },
+            //     }
+            // },  //验证结束
             name:{
                 validators: {
                     notEmpty: {
@@ -118,6 +118,13 @@ function initTable(){
         paginationNextText:"下一页",
         queryParams : function (params) {
             //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            params["classesId"]=$("#search_classes").val();
+            params["majorId"]=$("#search_major").val();
+            params["name"]=$("#search_name").val();
+            params["sex"]=$("#search_sex").val();
+            params["mobile"]=$("#search_mobile").val();
+            params["state"]=$("#search_state").val();
+            params["id"]=$("#search_id").val();
             return params;
         },
         columns: [
@@ -167,49 +174,11 @@ function initTable(){
                 valign: 'middle',
                 sortable: true
             },{
-                field: 'birthday',
-                title:'生日',
-                valign: 'middle',
-                sortable: true,
-                formatter:function (vlue) {
-                    return  vlue.substr(0,10)
-                }
-            },{
                 field: 'education',
                 title:'学历',
                 valign: 'middle',
                 sortable: true,
                 formatter:educationFormatter
-            },{
-                field: 'schoolName',
-                title:'学校名字',
-                valign: 'middle',
-                sortable: true
-            },{
-                field: 'collegeMajor',
-                title:'所学专业',
-                valign: 'middle',
-                sortable: true
-            },{
-                field: 'idCard',
-                title:'身份证号码',
-                valign: 'middle',
-                sortable: true
-            },{
-                field: 'qq',
-                title:'QQ号码',
-                valign: 'middle',
-                sortable: true
-            },{
-                field: 'homeAddress',
-                title:'家庭地址',
-                valign: 'middle',
-                sortable: true
-            },{
-                field: 'currentAddress',
-                title:'现住地址',
-                valign: 'middle',
-                sortable: true
             },{
                 field: 'state',
                 title:'状态',
@@ -250,6 +219,15 @@ function educationFormatter(value,row,index) {
 
 
 function initEvent() {
+    $("#search_major").change(function () {
+        let majorId =$(this).val();
+        //获取班级列表元素
+        let classes=$("#edit_classes");
+        //清空班级列表内容
+        classes.find("option:gt(0)").remove();
+        ajaxLoadClass(majorId,classes);
+    });
+    $("#btnSelect").click(searchStudent);
     //新增
     $("#btnAdd").click(addForm);
     //修改按钮
@@ -267,6 +245,11 @@ function initEvent() {
 
     });
 }
+
+function searchStudent() {
+    $("#tb").bootstrapTable('refresh',{query:{offset:0}});
+}
+
 
 //新增操作
 function addForm(){

@@ -38,8 +38,74 @@
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-inline">
-                        <button type="button" class="btn btn-primary" id="btnAdd">新增</button>
+                    <form class="form-inline" id="searchForm">
+                        <div class="panel">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">专业</div>
+                                    <select class="form-control" name="majorId" id="search_major" data-bv-trigger="blur">
+                                        <option value="0" selected>请选择...</option>
+                                        <#list majorList as m >
+                                            <option value="${m.id}">${m.name}</option>
+                                        </#list>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">班级</div>
+                                    <select class="form-control" name="classesId" id="search_classes" data-bv-trigger="blur">
+                                        <option value="0" selected>请选择...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">性别</div>
+                                    <select  class="form-control" id="search_sex" name="sex">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">就读状态</div>
+                                    <select  class="form-control" id="search_state" name="state">
+                                        <option value="1">在学</option>
+                                        <option value="2">休学</option>
+                                        <option value="3">退学</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div  class="input-group-addon">学号</div>
+                                <input type="text" class="form-control" id="search_id" name="id"  placeholder="请输入学号..."  data-bv-trigger="blur" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div  class="input-group-addon">姓名</div>
+                                <input type="text" class="form-control" id="search_name" name="name"  placeholder="请输入姓名..."  data-bv-trigger="blur" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div  class="input-group-addon">手机号码</div>
+                                <input type="text" class="form-control" id="search_mobile" name="mobile"  placeholder="请输入手机号码..."  data-bv-trigger="blur" >
+                            </div>
+                        </div>
+
+
+
+                        <button type="button" class="btn btn-danger" id="btnSelect" style="margin-left: 10px">查询</button>
+                        <button type="button" class="btn btn-success" id="btnAdd" style="margin-left: 10px">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
                     </form>
                 </div>

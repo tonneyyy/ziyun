@@ -190,7 +190,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultMap="BaseResultMap">
+  <select id="searchPage"  parameterType="com.hxzy.vo.StudentSearch" resultMap="BaseResultMap">
     SELECT
     s.id,
     s.`name`,
@@ -214,6 +214,36 @@
     FROM
     student AS s
     INNER JOIN classes AS c ON s.classesId = c.id
-    INNER JOIN major AS m ON s.majorId = m.id order by id
+    INNER JOIN major AS m ON s.majorId = m.id
+    where 1=1
+    <if test="id != null and id!='' ">
+      and s.id like concat('%',#{id},'%')
+    </if>
+    <if test="name != null and name!='' ">
+      and s.`name` like concat('%',#{name},'%')
+    </if>
+    <if test="majorId != null and majorId >= 0 and majorId!='' ">
+      and s.majorId = #{majorId}
+    </if>
+
+    <if test="classesId != null and classesId >= 0 and classesId!='' ">
+      and s.classesId = #{classesId}
+    </if>
+
+    <if test="mobile != null and mobile!=''" >
+      and s.mobile like concat('%',#{mobile},'%')
+    </if>
+
+    <if test="sex !=null" >
+      and s.sex like concat('%',#{sex},'%')
+    </if>
+
+    <if test="state != null and state >= 0" >
+      and s.state = #{state}
+    </if>
+
+    order by id
   </select>
+
+
 </mapper>

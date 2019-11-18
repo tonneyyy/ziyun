@@ -10,6 +10,7 @@ import com.hxzy.entity.Student;
 import com.hxzy.service.MajorService;
 import com.hxzy.service.StudentService;
 import com.hxzy.vo.ResultData;
+import com.hxzy.vo.StudentSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,6 @@ public class StudentController {
     @Autowired
     private ValidatorImpl validatorImpl;
 
-
     /**
      * 转发到学生信息页面
      * @return 学生信息页面
@@ -50,17 +50,16 @@ public class StudentController {
 
     /**
      * ajax分页请求学生信息数据
-     * @param pageSearch 分页信息offset页数 limit每页条数
+     * @param studentSearch 分页信息offset页数 limit每页条数 查询条件
      * @return 包装后响应的学生数据
      */
     @ResponseBody
     @PostMapping(value = "/student/data")
-    public ResponseMessage ajaxData(PageSearch pageSearch){
+    public ResponseMessage ajaxData(StudentSearch studentSearch){
         //分页用的数据
-        ResultData rs= this.studentService.searchPage(pageSearch);
+        ResultData rs= this.studentService.searchPage(studentSearch);
         return  new ResponseMessage(ResponseCodeEnum.SUCCESS,rs);
     }
-
 
     /**
      * 新增或者修改学生保存操作
@@ -79,6 +78,7 @@ public class StudentController {
         }
         return this.studentService.saveStudent(student);
     }
+
 
 
 }
