@@ -5,6 +5,11 @@ import com.hxzy.entity.Menu;
 
 import java.util.List;
 
+/**
+ * Author: Administrator
+ * Date: 2019/11/17 22:21
+ * Comment: 注释
+ */
 public interface MenuMapper extends BaseMapper<Menu,Integer> {
 
 
@@ -20,4 +25,10 @@ public interface MenuMapper extends BaseMapper<Menu,Integer> {
      * @return
      */
     List<Menu> loadUserMenu(int userId);
+
+    /**
+     * 根据父级ID查询菜单
+     * @param parentId 父级菜单OD
+     */
+    List<Menu> findByParentId(Integer parentId);
 }

@@ -53,9 +53,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
              //自己组装值
             MenuVO one=new MenuVO();
             one.setId(p.getId());
-            one.setActionname(p.getActionName());
+            one.setActionName(p.getActionName());
             one.setAuthority(p.getAuthority());
-            one.setMenuname(p.getMenuName());
+            one.setMenuName(p.getMenuName());
             //做第二级 遍历所有的数据库 .parentId=14( p.getId())，装到 one对象的 List<MenuVO> childrens
             loadRecursion(one,ownMenuList);
 
@@ -67,6 +67,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
         return newList;
     }
 
+
     //加载第二级(递归加载)
     private void loadRecursion(MenuVO one, List<Menu> ownMenuList) {
         List<MenuVO>  childrenList=new ArrayList<>();
@@ -75,9 +76,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
             //自己组装值
             MenuVO child=new MenuVO();
             child.setId(p.getId());
-            child.setActionname(p.getActionName());
+            child.setActionName(p.getActionName());
             child.setAuthority(p.getAuthority());
-            child.setMenuname(p.getMenuName());
+            child.setMenuName(p.getMenuName());
 
             //没有第三级节点 遍历所有的数据库 .parentId=14( p.getId())，装到 one对象的 List<MenuVO> childrens
             // loadSecondMenu(child,ownMenuList);
@@ -93,4 +94,34 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
     }
 
 
+
+    @Override
+    public List<Menu> findByParentId(Integer parentId) {
+        return this.menuMapper.findByParentId(parentId);
+    }
+
+
+
+    /**
+     * 新增修改菜单
+     * @param menu 传入菜单对象
+     * @return 是否成功
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public ResponseMessage saveMenu(Menu menu) {
+        boolean result=false;
+        if(menu.getId()==null ||  menu.getId()==0){
+            result=this.menuMapper.insert(menu)>0;
+        }else{
+            result=this.menuMapper.update(menu)>0;
+        }
+        ResponseMessage responseMessage=null;
+        if(result){
+            responseMessage =new ResponseMessage(ResponseCodeEnum.SUCCESS);
+        }else{
+            responseMessage =new ResponseMessage(ResponseCodeEnum.ERROR);
+        }
+        return responseMessage;
+    }
 }
