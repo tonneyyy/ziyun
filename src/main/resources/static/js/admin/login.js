@@ -107,7 +107,7 @@ function initValidator(){
         },
         fields: {
             // 添加验证的表单的name
-            username:{
+            name:{
                 message: '输入的值无效',
                 validators:{
                     notEmpty: {
