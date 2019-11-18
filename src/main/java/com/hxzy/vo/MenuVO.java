@@ -13,9 +13,9 @@ import java.util.List;
 public class MenuVO {
     private Integer id;
 
-    private String menuname;
+    private String menuName;
 
-    private String actionname;
+    private String actionName;
 
     private String authority;
 
@@ -23,5 +23,6 @@ public class MenuVO {
      * 子节点，前台页在循环用的
      */
     private List<MenuVO> childrens;
+
 
 }
