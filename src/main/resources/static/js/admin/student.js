@@ -219,6 +219,7 @@ function educationFormatter(value,row,index) {
 
 
 function initEvent() {
+    //查询专业选择事件
     $("#search_major").change(function () {
         let majorId =$(this).val();
         //获取班级列表元素
@@ -227,6 +228,7 @@ function initEvent() {
         classes.find("option:gt(0)").remove();
         ajaxLoadClass(majorId,classes);
     });
+    //查询按钮事件
     $("#btnSelect").click(searchStudent);
     //新增
     $("#btnAdd").click(addForm);

@@ -222,11 +222,11 @@
     <if test="name != null and name!='' ">
       and s.`name` like concat('%',#{name},'%')
     </if>
-    <if test="majorId != null and majorId >= 0 and majorId!='' ">
+    <if test="majorId != null and majorId > 0 and majorId!='' ">
       and s.majorId = #{majorId}
     </if>
 
-    <if test="classesId != null and classesId >= 0 and classesId!='' ">
+    <if test="classesId != null and classesId >0 and classesId!='' ">
       and s.classesId = #{classesId}
     </if>
 
@@ -234,11 +234,12 @@
       and s.mobile like concat('%',#{mobile},'%')
     </if>
 
-    <if test="sex !=null" >
-      and s.sex like concat('%',#{sex},'%')
+
+    <if test='sex == "男" or sex == "女"' >
+      and s.sex =#{sex}
     </if>
 
-    <if test="state != null and state >= 0" >
+    <if test="state != null and state > 0" >
       and s.state = #{state}
     </if>
 

@@ -63,6 +63,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">性别</div>
                                     <select  class="form-control" id="search_sex" name="sex">
+                                        <option value="">请选择</option>
                                         <option value="男">男</option>
                                         <option value="女">女</option>
                                     </select>
@@ -73,6 +74,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">就读状态</div>
                                     <select  class="form-control" id="search_state" name="state">
+                                        <option value="0">请选择</option>
                                         <option value="1">在学</option>
                                         <option value="2">休学</option>
                                         <option value="3">退学</option>
@@ -104,9 +106,10 @@
 
 
 
-                        <button type="button" class="btn btn-danger" id="btnSelect" style="margin-left: 10px">查询</button>
+                        <button type="button" class="btn btn-info" id="btnSelect" style="margin-left: 10px">查询</button>
                         <button type="button" class="btn btn-success" id="btnAdd" style="margin-left: 10px">新增</button>
-                        <button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
+                        <button type="button" class="btn btn-primary" id="btnEdit" style="margin-left: 10px">编辑</button>
+                        <button type="button" class="btn btn-danger" id="btnEdit">删除</button>
                     </form>
                 </div>
             </div>
