@@ -34,7 +34,7 @@ public class Teacher {
     /**
      * 专业
      */
-    private List<TeacherVO> teachKnowledge;
+    private String teachKnowledge;
     /**
      * 手机号码
      */
@@ -44,7 +44,7 @@ public class Teacher {
      */
     private String sex;
     /**
-     * 性别
+     * 生日
      */
     private Date birthday;
     /**
