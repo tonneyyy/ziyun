@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.mapper.DataMapper">
+  <resultMap id="BaseResultMap" type="com.hxzy.entity.Data">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="types" jdbcType="INTEGER" property="types" />
+  </resultMap>
+  <select id="findOne" parameterType="java.lang.Integer" resultType="com.hxzy.entity.Data">
+    select *
+    from sys_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" keyProperty="id" parameterType="com.hxzy.entity.Data" useGeneratedKeys="true">
+    insert into sys_data (`name`, `state`, types
+      )
+    values (#{name,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{types,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <update id="updateSelective" parameterType="com.hxzy.entity.Data">
+    update sys_data
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="types != null">
+        types = #{types,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="com.hxzy.entity.Data">
+    update sys_data
+    set `name` = #{name,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=INTEGER},
+      types = #{types,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="com.hxzy.entity.Data">
+    SELECT * FROM sys_data
+  </select>
+  <select id="existTypesName" resultType="int">
+    SELECT COUNT(*)
+    FROM sys_data
+    WHERE `name`=#{value}
+  </select>
+  <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Data">
+    select * from sys_data  order by id
+  </select>
+</mapper>
