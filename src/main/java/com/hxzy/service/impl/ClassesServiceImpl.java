@@ -32,7 +32,7 @@ public class ClassesServiceImpl extends BaseServiceImpl<Classes,Integer> impleme
 
     @Override
     public ResponseMessage findMajor() {
-        List<Marjor> marjor = this.classesMapper.findMajor();
+        List<Major> marjor = this.classesMapper.findMajor();
 
 
         return new ResponseMessage(ResponseCodeEnum.SUCCESS, marjor);
