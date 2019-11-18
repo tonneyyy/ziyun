@@ -65,7 +65,7 @@
                     
 	                  <div class="form-group">	
 					         <div class="col-sm-12">
-					            <input   type="text" class="form-control uname" id="username"  name="username" placeholder="用户名" autocomplete="off">
+					            <input   type="text" class="form-control uname" id="name"  name="name" placeholder="用户名" autocomplete="off">
 					       </div>
 					 </div>
                     
