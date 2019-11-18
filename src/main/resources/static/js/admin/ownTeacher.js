@@ -63,43 +63,57 @@ function initownUserTable() {
             {
                 field: 'sex',
                 title:'性别',
+                formatter:sexFormatter,
                 valign: 'middle'
             },
             {
                 field: 'education',
                 title:'学历',
-                formatter:function (value,row,index) {
-                    if(value==1){
-                        return "<span class=\"label label-primary\">本科</span>"
-                    }
-                    if(value==2){
-                        return "<span class=\"label label-primary\">专科</span>"
-                    }
-                    if(value == 3){
-                        return "<span class=\"label label-primary\">专科以下</span>"
-                    }
-                    if(value == 4){
-                        return "<span class=\"label label-primary\">研究生</span>"
-                    }
-                },
+                formatter:eduFormatter,
                 valign: 'middle'
             },
             {
                 field: 'state',
                 title:'状态',
-                formatter:function (value,row,index) {
-                    if(value == 1){
-                        return "<span class=\"label label-primary\">正常</span>"
-                    }if(value==2){
-                        return "<span class=\"label label-primary\">休假</span>"
-                    }if(value == 3){
-                        return "<span class=\"label label-primary\">离职</span>"
-                    }
-                },
+                formatter:stateFormatter,
                 valign: 'middle'
             },
         ]
     });
+}
+
+function stateFormatter(value, row, index) {
+    if(value == 1){
+        return "<span class=\"label label-primary\">正常</span>"
+    }if(value==2){
+        return "<span class=\"label label-primary\">休假</span>"
+    }if(value == 3){
+        return "<span class=\"label label-primary\">离职</span>"
+    }
+}
+
+function sexFormatter(value,row,index) {
+    if(value=="男"){
+        return "<span class=\"label label-info\">男</span>"
+    }
+    if(value=="女"){
+        return "<span class=\"label label-danger\">女</span>"
+    }
+}
+
+function eduFormatter(value, row, index) {
+    if(value==12){
+        return "<span class=\"label label-primary\">本科</span>"
+    }
+    if(value==13){
+        return "<span class=\"label label-primary\">专科</span>"
+    }
+    if(value == 14){
+        return "<span class=\"label label-primary\">专科以下</span>"
+    }
+    if(value == 11){
+        return "<span class=\"label label-primary\">研究生</span>"
+    }
 }
 
 function initnoOwnUserTable() {
@@ -146,37 +160,21 @@ function initnoOwnUserTable() {
                 sortable: true
             },
             {
-                field: 'teachKnowledge',
-                title:'所带专业',
-                valign: 'middle'
-            },
-            {
                 field: 'sex',
                 title:'性别',
+                formatter:sexFormatter,
                 valign: 'middle'
             },
             {
                 field: 'education',
                 title:'学历',
-                formatter:function (value,row,index) {
-                    if(value==1){
-                        return "本科"
-                    }
-                    if(value==2){
-                        return "专科"
-                    }
-                    if(value == 3){
-                        return "专科以下"
-                    }
-                    if(value == 4){
-                        return "研究生"
-                    }
-                },
+                formatter:eduFormatter,
                 valign: 'middle'
             },
             {
                 field: 'state',
                 title:'状态',
+                formatter:stateFormatter,
                 valign: 'middle'
             },
         ]
