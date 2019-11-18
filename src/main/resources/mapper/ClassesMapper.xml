@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxzy.mapper.ClassesMapper" >
+
+  <resultMap id="BaseResultMap" type="com.hxzy.entity.Classes" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="marjorId" property="marjorid" jdbcType="INTEGER" />
+    <result column="rules" property="rules" jdbcType="VARCHAR" />
+    <result column="startNum" property="startnum" jdbcType="INTEGER" />
+    <result column="openingDate" property="openingdate" jdbcType="DATE" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, name, marjorId, rules, startNum, openingDate
+  </sql>
+
+  <select id="findOne" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from classes
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteBy" parameterType="java.lang.Integer" >
+    delete from classes
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.hxzy.entity.Classes" >
+    insert into classes (id, name, marjorId, 
+      rules, startNum, openingDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{marjorid,jdbcType=INTEGER}, 
+      #{rules,jdbcType=VARCHAR}, #{startnum,jdbcType=INTEGER}, #{openingdate,jdbcType=DATE}
+      )
+  </insert>
+
+  <update id="updateSelective" parameterType="com.hxzy.entity.Classes" >
+    update classes
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="marjorid != null" >
+        marjorId = #{marjorid,jdbcType=INTEGER},
+      </if>
+      <if test="rules != null" >
+        rules = #{rules,jdbcType=VARCHAR},
+      </if>
+      <if test="startnum != null" >
+        startNum = #{startnum,jdbcType=INTEGER},
+      </if>
+      <if test="openingdate != null" >
+        openingDate = #{openingdate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="update" parameterType="com.hxzy.entity.Classes" >
+    update classes
+    set name = #{name,jdbcType=VARCHAR},
+      marjorId = #{marjorid,jdbcType=INTEGER},
+      rules = #{rules,jdbcType=VARCHAR},
+      startNum = #{startnum,jdbcType=INTEGER},
+      openingDate = #{openingdate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Classes">
+    select * from classes  order by id
+  </select>
+
+  <select id="findMajor" resultType="com.hxzy.entity.Marjor">
+    SELECT * from major
+  </select>
+
+  <select id="findMarjorByid" resultType="com.hxzy.entity.Marjor">
+    SELECT * from major
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="ownTeacher" parameterType="int" resultType="com.hxzy.entity.Teacher">
+    SELECT  u.id,u.name,u.marjorId
+    FROM  teacher_classes AS ru
+    INNER JOIN `classes` AS u
+    ON ru.teacherId = u.id
+    where  ru.classesId=#{classesId}
+  </select >
+
+  <!--根据角色id 查询没有角色id的用户有哪些 -->
+  <select id="noOwnTeacher" parameterType="int" resultType="com.hxzy.entity.Teacher">
+    select u.id,u.name,u.marjorId
+    from `teacher` AS u
+    where   not EXISTS(  select ru.teacherId from teacher_classes  ru
+    where ru.classesId=#{classesId} and  ru.teacherId=u.id)
+  </select >
+
+  <delete id="saveRemove">
+    DELETE from teacher_classes where classesId = #{classesId}
+    AND teacherId IN
+    <foreach collection="list" item="p" open="(" separator="," close=")">
+      #{p}
+    </foreach>
+  </delete>
+
+  <insert id="saveAdd" >
+    insert into teacher_classes(classesId,teacherId) values
+    <foreach collection="list" item="p" separator="," >
+      (#{classesId}, #{p})
+    </foreach>
+  </insert>
+
+</mapper>
