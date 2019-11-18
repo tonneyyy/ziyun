@@ -61,7 +61,7 @@ function initownUserTable() {
                 sortable: true
             },
             {
-                field: 'teachKnowledge',
+                field: 'teachknowledge',
                 title:'所带专业',
                 valign: 'middle'
             },
@@ -75,7 +75,7 @@ function initownUserTable() {
                 title:'学历',
                 formatter:function (value,row,index) {
                     if(value==1){
-                        return "本科"
+                        return "<span class=\"label label-primary\">上架</span>"
                     }
                     if(value==2){
                         return "专科"
