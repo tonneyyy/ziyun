@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ClassesMapper extends BaseMapper<Classes,Integer> {
 
-    List<Marjor> findMajor();
+    List<Major> findMajor();
 
-    Marjor findMarjorByid(Integer id);
+    Major findMarjorByid(Integer id);
 
     List<Teacher> ownTeacher(int classesId);
 

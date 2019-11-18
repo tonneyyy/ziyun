@@ -72,11 +72,11 @@
     select * from classes  order by id
   </select>
 
-  <select id="findMajor" resultType="com.hxzy.entity.Marjor">
+  <select id="findMajor" resultType="com.hxzy.entity.Major">
     SELECT * from major
   </select>
 
-  <select id="findMarjorByid" resultType="com.hxzy.entity.Marjor">
+  <select id="findMarjorByid" resultType="com.hxzy.entity.Major">
     SELECT * from major
     where id = #{id,jdbcType=INTEGER}
   </select>
