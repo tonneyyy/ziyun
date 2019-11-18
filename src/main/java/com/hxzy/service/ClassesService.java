@@ -27,4 +27,5 @@ public interface ClassesService extends BaseService<Classes,Integer> {
      * @return
      */
     ResponseMessage  halfHearClasses(int majorId);
+
 }

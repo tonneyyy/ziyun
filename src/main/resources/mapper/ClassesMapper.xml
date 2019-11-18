@@ -144,4 +144,5 @@
     where openingDate>=DATE_SUB(now(),INTERVAL 6 MONTH)    and   major=#{majorId}
   </select>
 
+
 </mapper>
