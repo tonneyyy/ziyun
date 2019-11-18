@@ -25,6 +25,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="findByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where parentId = #{parentId,jdbcType=INTEGER}
+  </select>
+
 
   <insert id="insert" parameterType="com.hxzy.entity.Menu"  useGeneratedKeys="true" keyProperty="id">
     insert into sys_menu (id, menuName, menuLevel, 

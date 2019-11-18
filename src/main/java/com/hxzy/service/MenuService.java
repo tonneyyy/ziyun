@@ -20,4 +20,8 @@ public interface MenuService  extends BaseService<Menu,Integer> {
      * @return
      */
     List<MenuVO> loadUserMenu(int userId);
+
+    List<Menu> findByParentId(Integer parentId);
+
+    ResponseMessage saveMenu(Menu menu);
 }
