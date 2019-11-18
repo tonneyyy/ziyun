@@ -123,7 +123,7 @@
                            <div class="col-sm-6">
                                <div class="input-group date">
                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                   <input type="text" id="datetimepicker" name="openingDate" placeholder="选择年月">
+                                   <input type="text" id="datetimepicker" name="openingdate" placeholder="选择年月">
                                </div>
                            </div>
                        </div>

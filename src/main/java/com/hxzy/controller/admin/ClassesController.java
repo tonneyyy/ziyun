@@ -51,15 +51,16 @@ public class ClassesController {
 
     @ResponseBody
     @PostMapping(value = "/classes/save")
-    public ResponseMessage sava(Classes classes,@RequestParam("openingDate") String date){
+    public ResponseMessage sava(Classes classes){
+
         boolean result = false;
-        Date date1 = DateUtil.stringToDate(date);
-        classes.setOpeningdate(date1);
+
         if(classes.getId() == null || classes.getId() == 0){
             result = this.classesService.insert(classes);
         }else{
             result = this.classesService.update(classes);
         }
+
         ResponseMessage responseMessage = null;
         if(result){
             responseMessage = new ResponseMessage(ResponseCodeEnum.SUCCESS);

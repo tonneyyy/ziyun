@@ -70,17 +70,31 @@
 
   <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Classes">
     SELECT
-      c.id,
-      c.`name`,
-      c.marjorId,
-      c.rules,
-      c.startNum,
-      c.openingDate,
-      m.`name` AS majorName
-      FROM
-      classes AS c
-      INNER JOIN major AS m ON c.marjorId = m.id
-     order by  c.openingDate desc
+    c.id,
+    c.`name`,
+    c.marjorId,
+    c.rules,
+    c.startNum,
+    c.openingDate,
+    m.`name` AS majorName,
+    ifnull(
+    (SELECT
+    GROUP_CONCAT(t.`name`)
+    FROM
+    teacher_classes AS tc
+    LEFT JOIN teacher AS t ON tc.teacherId = t.id
+    where  tc.classesId=c.id)
+    ,'&lt;span class="label label-danger"&gt;未分配&lt;/span&gt;') as teachers
+    FROM
+    classes AS c
+    INNER JOIN major AS m ON c.marjorId = m.id
+    order by  c.openingDate desc
+
+
+
+
+
+
   </select>
 
   <select id="findMajor" resultType="com.hxzy.entity.Major">
@@ -122,5 +136,12 @@
       (#{classesId}, #{p})
     </foreach>
   </insert>
+
+
+  <select id="halfHearClasses" parameterType="int" resultType="com.hxzy.entity.Classes">
+    select id,name
+    from classes
+    where openingDate>=DATE_SUB(now(),INTERVAL 6 MONTH)    and   major=#{majorId}
+  </select>
 
 </mapper>

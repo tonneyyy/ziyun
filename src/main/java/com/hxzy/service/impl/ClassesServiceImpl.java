@@ -78,7 +78,7 @@ public class ClassesServiceImpl extends BaseServiceImpl<Classes,Integer> impleme
         return new ResponseMessage(ResponseCodeEnum.SUCCESS,resultData);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public ResponseMessage saveRemove(int classesId, List<Integer> permsList) {
         ResponseMessage responseMessage = null;
@@ -91,7 +91,7 @@ public class ClassesServiceImpl extends BaseServiceImpl<Classes,Integer> impleme
         return responseMessage;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public ResponseMessage saveAdd(int classesId, List<Integer> permsList) {
         ResponseMessage responseMessage = null;
@@ -101,6 +101,15 @@ public class ClassesServiceImpl extends BaseServiceImpl<Classes,Integer> impleme
         }else{
             responseMessage = new ResponseMessage(ResponseCodeEnum.ERROR);
         }
+        return responseMessage;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public ResponseMessage halfHearClasses(int majorId) {
+        ResponseMessage responseMessage = null;
+        List<Classes>  list=this.classesMapper.halfHearClasses(majorId);
+        responseMessage = new ResponseMessage(ResponseCodeEnum.SUCCESS,list);
         return responseMessage;
     }
 }

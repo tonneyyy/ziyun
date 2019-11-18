@@ -21,4 +21,10 @@ public interface ClassesService extends BaseService<Classes,Integer> {
 
     ResponseMessage saveAdd(int roleId,List<Integer> permsList);
 
+    /**
+     * 根据专业查询半内开班的信息
+     * @param majorId
+     * @return
+     */
+    ResponseMessage  halfHearClasses(int majorId);
 }

@@ -66,6 +66,10 @@ function initTable(){
                 field: 'majorName',
                 title:'所属专业',
                 valign: 'middle',
+            },{
+                field: 'teachers',
+                title:'带班教师',
+                valign: 'middle',
             },
             {
                 field: 'rules',
@@ -201,11 +205,6 @@ function asyncSaveData(){
         //主键加进去
         saveData+="&id="+primaryKey;
 
-        let openingDate = $(".datetimepicker").datetimepicker("getDate");
-
-        saveData.replace("openingdate",openingDate);
-
-
         //ajax提交数据
         $.ajax({
             type:"POST",
@@ -232,7 +231,9 @@ function asyncSaveData(){
 function iniDate() {
     $('#datetimepicker').datetimepicker({
         format: 'yyyy-mm-dd',
-        autoclose :true
+        autoclose :true,
+        minView:2,   //月视图
+        language: 'zh-CN'
     })
 }
 

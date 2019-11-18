@@ -22,4 +22,14 @@ public interface ClassesMapper extends BaseMapper<Classes,Integer> {
 
 
     int saveAdd(@Param("classesId") int classesId,@Param("list") List<Integer> permsList);
+
+
+    /**
+     * 根据专业查询半内开班的信息
+     * @param majorId
+     * @return
+     */
+    List<Classes>  halfHearClasses(int majorId);
+
+
 }

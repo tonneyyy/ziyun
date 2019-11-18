@@ -1,8 +1,8 @@
 ailibaba:
   durid:
-    url: jdbc:mysql://192.168.20.15:3306/ziyun?serverTimezone=UTC&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.20.89:3306/ziyun?serverTimezone=UTC&characterEncoding=utf-8
     username: root
-    password: zzz123
+    password: root
     maxActive: 20
     maxWait: 10000
     minIdle: 3
