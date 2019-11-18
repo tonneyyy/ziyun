@@ -2,7 +2,7 @@ package com.hxzy.mapper;
 
 import com.hxzy.common.mapper.BaseMapper;
 import com.hxzy.entity.Classes;
-import com.hxzy.entity.Marjor;
+import com.hxzy.entity.Major;
 import com.hxzy.entity.Teacher;
 import org.apache.ibatis.annotations.Param;
 

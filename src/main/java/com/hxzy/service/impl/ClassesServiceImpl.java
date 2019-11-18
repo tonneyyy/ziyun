@@ -6,7 +6,7 @@ import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.service.impl.BaseServiceImpl;
 import com.hxzy.entity.Classes;
-import com.hxzy.entity.Marjor;
+import com.hxzy.entity.Major;
 import com.hxzy.entity.Teacher;
 import com.hxzy.mapper.ClassesMapper;
 import com.hxzy.service.ClassesService;
@@ -40,7 +40,7 @@ public class ClassesServiceImpl extends BaseServiceImpl<Classes,Integer> impleme
 
     @Override
     public ResponseMessage findMarjorByid(Integer id) {
-        Marjor marjorByid = this.classesMapper.findMarjorByid(id);
+        Major marjorByid = this.classesMapper.findMarjorByid(id);
         return new ResponseMessage(ResponseCodeEnum.SUCCESS,marjorByid);
     }
 
