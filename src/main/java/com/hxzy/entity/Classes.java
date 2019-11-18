@@ -13,6 +13,7 @@ public class Classes {
     private String name;
 
     private Integer marjorid;
+    private String majorName;
 
     private String rules;
 

@@ -63,22 +63,8 @@ function initTable(){
                 sortable: true
             },
             {
-                field: 'marjorid',
+                field: 'majorName',
                 title:'所属专业',
-                formatter:function (value,row,index) {
-                    $.ajax({
-                        type:"GET",
-                        url:projectName+"/admin/classes/"+value+"/findmarjor",
-                        dataType:"json",
-                        success:function (resp) {
-                            if(resp.code==0){
-                                return resp.result.name;
-                            }else{
-                                return "读取专业名称失败"
-                            }
-                        }
-                    })
-                },
                 valign: 'middle',
             },
             {

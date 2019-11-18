@@ -69,7 +69,18 @@
   </update>
 
   <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Classes">
-    select * from classes  order by id
+    SELECT
+      c.id,
+      c.`name`,
+      c.marjorId,
+      c.rules,
+      c.startNum,
+      c.openingDate,
+      m.`name` AS majorName
+      FROM
+      classes AS c
+      INNER JOIN major AS m ON c.marjorId = m.id
+     order by  c.openingDate desc
   </select>
 
   <select id="findMajor" resultType="com.hxzy.entity.Major">
