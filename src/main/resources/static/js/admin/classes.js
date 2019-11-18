@@ -141,7 +141,6 @@ function initFormValidator(){
                         message: '班级名称不能为空'
                     },
                     // remote: {
-                    //     //验证规则应该是当焦点移开的时候，才验证，不然后台  扛不住的
                     //     url: projectName+'/admin/class/exist/className',
                     //     type:"POST",
                     //     data: {
