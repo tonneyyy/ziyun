@@ -65,6 +65,20 @@ public class RedisUtil {
     }
 
     /**
+     * -1代表错误
+     * @param key
+     * @return
+     */
+    public long incr(String key) {
+        try {
+            return redisTemplate.opsForValue().increment(key);
+        } catch (Exception e) {
+            log.error("redis error: ", e);
+            return -1;
+        }
+    }
+
+    /**
      * 删除缓存
      *
      * @param key 可以传一个值 或多个

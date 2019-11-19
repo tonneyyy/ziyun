@@ -255,4 +255,18 @@
   </delete>
 
 
+  <insert id="insertBatch"  >
+    insert into student (id, `name`, majorId,classesId, portrait, mobile, joinDate, sex, birthday, education, 
+      schoolName, collegeMajor, idCard, qq, homeAddress, currentAddress, `state`)
+    values 
+    <foreach collection="list" item="p" separator=",">
+      (#{p.id,jdbcType=VARCHAR}, #{p.name,jdbcType=VARCHAR}, #{p.majorId,jdbcType=INTEGER},
+        #{p.classesId,jdbcType=INTEGER}, #{p.portrait,jdbcType=VARCHAR}, #{p.mobile,jdbcType=VARCHAR},
+        #{p.joinDate,jdbcType=DATE}, #{p.sex,jdbcType=CHAR}, #{p.birthday,jdbcType=DATE}, #{p.education,jdbcType=INTEGER},
+        #{p.schoolName,jdbcType=VARCHAR}, #{p.collegeMajor,jdbcType=VARCHAR}, #{p.idCard,jdbcType=VARCHAR},
+        #{p.qq,jdbcType=VARCHAR}, #{p.homeAddress,jdbcType=VARCHAR}, #{p.currentAddress,jdbcType=VARCHAR},
+        #{p.state,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
 </mapper>
