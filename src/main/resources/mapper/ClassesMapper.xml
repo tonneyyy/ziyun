@@ -141,7 +141,7 @@
   <select id="halfHearClasses" parameterType="int" resultType="com.hxzy.entity.Classes">
     select id,name
     from classes
-    where openingDate>=DATE_SUB(now(),INTERVAL 6 MONTH)    and   major=#{majorId}
+    where openingDate>=DATE_SUB(now(),INTERVAL 6 MONTH)    and   marjorId=#{majorId}
   </select>
 
 

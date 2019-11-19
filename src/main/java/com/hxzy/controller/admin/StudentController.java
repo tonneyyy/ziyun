@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -80,5 +81,40 @@ public class StudentController {
     }
 
 
+    /**
+     * 批量导入excel
+     * @return 学生信息页面
+     */
+    @GetMapping(value = "/student/import")
+    public String excelImport(Model model){
+        ResponseMessage rm = this.majorService.findAll();
+        List<Major> result =( List<Major>) rm.getResult();
+        model.addAttribute("majorList",result);
+        return "admin/student/batchImport";
+    }
+
+    /**
+     * 批量上传文件导入数据库操作
+     * @param model
+     * @return
+     */
+    @PostMapping(value = "/student/batch")
+    public String excelBatch(int majorId,int classesId,MultipartFile attach, Model model){
+
+         ResponseMessage rm=this.studentService.batchImportStudent(majorId,classesId,attach);
+
+         if(rm.getCode()==0){
+             return "redirect:/admin/student/search";
+         }else{
+             model.addAttribute("error",rm.getMessage());
+
+             //重新查询一次数据
+             ResponseMessage rmMa = this.majorService.findAll();
+             List<Major> result =( List<Major>) rmMa.getResult();
+             model.addAttribute("majorList",result);
+
+             return "admin/student/batchImport";
+         }
+    }
 
 }

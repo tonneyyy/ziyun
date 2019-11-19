@@ -112,8 +112,9 @@ public class ClassesController {
     @ResponseBody
     @GetMapping(value = "/classes/{majorId}/data")
     public ResponseMessage findMajor(@PathVariable("majorId") int majorId){
-        return this.classesService.findMarjorByid(majorId);
+        return this.classesService.halfHearClasses(majorId);
     }
+
 
 
 }
