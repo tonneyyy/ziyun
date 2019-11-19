@@ -75,20 +75,31 @@ public class TeacherController {
      */
     @ResponseBody
     @PostMapping(value = "/teacher/save")
-    public ResponseMessage save(Teacher teacher){
+    public ResponseMessage save(Teacher teacher,int[] knowledge){
         //判断值是否有问题
         ValidatorResult validatorResult=validator.validate(teacher);
         //有错
         if (validatorResult.isHasErrors()){
             return  new ResponseMessage(ResponseCodeEnum.ERROR,validatorResult.getErroMsgMap());
         }
+
+
+        StringBuffer str=new StringBuffer();
+        for(int i=0;i<knowledge.length;i++){
+            str.append(knowledge[i]);
+            if(i!=knowledge.length-1){
+                str.append(",");
+            }
+        }
+
+        teacher.setTeachKnowledge(str.toString());
         boolean result=false;
         //新增
         if (teacher.getId()==null||teacher.getId()==0){
             result=this.teacherService.insert(teacher);
         }else {
             //修该先查询用户
-            result=this.teacherService.update(teacher);
+            result=this.teacherService.updateSelective(teacher);
         }
         ResponseMessage responseMessage=null;
         if (result){

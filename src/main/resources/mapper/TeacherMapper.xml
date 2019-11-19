@@ -166,4 +166,8 @@
         from `teacher`
         where name=#{name}
     </select>
+
+    <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Teacher">
+     select * from teacher  order by id
+  </select>
 </mapper>

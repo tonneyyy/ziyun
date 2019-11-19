@@ -1,15 +1,26 @@
 package com.hxzy.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.hxzy.common.bean.ResponseMessage;
+import com.hxzy.common.search.PageSearch;
 import com.hxzy.common.service.impl.BaseServiceImpl;
-import com.hxzy.common.util.MD5Util;
+
+import com.hxzy.entity.Major;
 import com.hxzy.entity.Teacher;
+import com.hxzy.mapper.MajorMapper;
 import com.hxzy.mapper.TeacherMapper;
 import com.hxzy.service.TeacherService;
+import com.hxzy.vo.ResultData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
+
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * describe:
@@ -21,6 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> implements TeacherService{
     @Autowired
     private TeacherMapper teacherMapper;
+
+    @Autowired
+    private MajorMapper majorMapper;
+
     @Autowired
     public void setTeacherMapper(TeacherMapper teacherMapper) {
         this.teacherMapper = teacherMapper;
@@ -54,28 +69,51 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
         mp.put("valid",result);
         return mp;
     }
-    @Transactional(propagation = Propagation.REQUIRED)
+
     @Override
-    public boolean insert(Teacher teacher) {
-        //生成盐
-        teacher.setSalt(MD5Util.randomSalt(5));
-        //生成加密的字符串
-        teacher.setPassword(MD5Util.MD5Encode(teacher.getPassword(),teacher.getSalt()));
-        return super.insert(teacher);
+    public ResponseMessage login(HttpSession session, Teacher teacher) {
+
+        return null;
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRED)
+
     @Override
-    public boolean update(Teacher teacher) {
-         Teacher dbteacher=this.teacherMapper.findOne(teacher.getId());
-         //得到原来的盐
-        if (dbteacher==null){
-            return  false;
+    public ResultData searchPage(PageSearch pageSearch) {
+
+         //专业
+        List<Major> arrMajor=this.majorMapper.findAll();
+
+        //分页查询
+        PageHelper.offsetPage(pageSearch.getOffset(),pageSearch.getLimit());
+        List<Teacher> rows=  this.teacherMapper.searchPage(pageSearch);
+
+
+        for(Teacher  t :rows){
+            //循环
+            StringBuffer str=new StringBuffer();
+
+            String know=t.getTeachKnowledge();
+            if(StringUtils.isNotBlank(know)){
+                String[]  arr=know.split(",");
+                for(int i=0;i<arr.length;i++){
+                    int  searchId=Integer.parseInt(arr[i]);
+                    Major major=  arrMajor.stream().filter(p->p.getId()== searchId).findFirst().get();
+                    str.append(major.getName());
+                    if(i!= arr.length-1){
+                        str.append(",");
+                    }
+                }
+            }
+            t.setTeachKnowledgeString(str.toString());
         }
-        teacher.setSalt(dbteacher.getSalt());
-        teacher.setPassword(MD5Util.MD5Encode(teacher.getPassword(),teacher.getSalt()));
-        return super.update(teacher);
-    }
+        //强转
+        Page pg=(Page) rows;
 
+        //返回结果
+        ResultData resultData=new ResultData();
+        resultData.setRows(rows);
+        resultData.setTotal(pg.getTotal());
+        return resultData;
+    }
 }
