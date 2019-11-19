@@ -61,6 +61,7 @@ public class MD5Util {
 
 
 
+
     /**
      * MD5加密
      * @param origin 明文密码字符
