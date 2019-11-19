@@ -264,7 +264,6 @@ function editForm(){
     //主键
     primaryKey=data.id;
 
-    //其它的表单元素( 理论上是： 编写 一个方法 循环  还原值)
     $("#edit_classesname").val(data.name);
     $("#edit_marjor").val(data.marjorid);
     $("#edit_rules").val(data.rules);
