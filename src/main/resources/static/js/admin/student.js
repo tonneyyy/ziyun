@@ -193,7 +193,7 @@ function initTable(){
 function portraitFormat(value,row,index){
     //状态
     if(value){
-        return "<img src='http://192.168.20.89:8080"+value+"' width='50'>";
+        return "<img src='"+value+"' width='50'>";
     }
 
     return "";
@@ -254,7 +254,6 @@ function initEvent() {
         //清空班级列表内容
         classes.find("option:gt(0)").remove();
         ajaxLoadClass(majorId,classes);
-
     });
 
 
@@ -263,7 +262,7 @@ function initEvent() {
 
 
         var editor = K.editor({
-            uploadJson :  "http://192.168.20.89:8080/api/upload",  //配置文件上传路径
+            uploadJson :  projectName+"/api/upload",  //配置文件上传路径
             allowFileManager : false   //不允许查看服务器图片文件
         });
 
