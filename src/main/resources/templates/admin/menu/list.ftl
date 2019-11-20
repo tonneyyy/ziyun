@@ -48,6 +48,7 @@
 
                 <div class="panel-body">
                     <form class="form-inline">
+                        <button type="button" class="btn btn-primary" id="btnRoot">新增目录</button>
                         <button type="button" class="btn btn-primary" id="btnAdd">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit">修改</button>
                     </form>
@@ -55,7 +56,75 @@
             </div>
 
 
-            <!-- 模态框 -->
+            <!-- 模态框 新增目录 -->
+            <div class="modal fade" id="myModalRoot" tabindex="-1" role="dialog" aria-labelledby="myModalLabelRoot">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabelRoot">标题</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editRoot"  class="form-horizontal" >
+
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">选择菜单目录</div>
+                                        <select class="form-control" name="parentId" id="root_parentId">
+                                            <option value="0"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">目录</div>
+                                        <input type="text" class="form-control" name="menuName" id="root_menuName"
+                                               placeholder="请输入目录名称..." data-bv-trigger="blur">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">选择菜单类型</div>
+                                        <select class="form-control" name="menuLevel" id="root_menuLevel">
+                                            <option value="1">目录</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">排序</div>
+                                        <input type="text" class="form-control" name="sort" id="root_sort"
+                                               placeholder="请输入排序数字..." data-bv-trigger="blur">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">状态</div>
+                                        <select class="form-control" name="state" id="root_state">
+                                            <option value="1">可见</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="btnSaveRoot">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模态框 新增菜单按钮 -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -69,24 +138,13 @@
 
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">选择菜单目录</div>
+                                        <div class="input-group-addon" id="root_title">选择菜单目录</div>
                                         <select class="form-control" name="parentId" id="edit_parentId">
                                             <option value="0">创建菜单目录</option>
-                                            <#list menuList as m>
-                                                <option value="${m.id}">${m.menuName}</option>
-                                            </#list>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">选择按钮菜单</div>
-                                        <select class="form-control" name="towMenu" id="edit_towMenu">
-                                            <option value="0">请选择</option>
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -95,9 +153,6 @@
                                                placeholder="请输入菜单名称..." data-bv-trigger="blur">
                                     </div>
                                 </div>
-
-
-
 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -115,11 +170,9 @@
 
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">选择菜单类型</div>
+                                        <div class="input-group-addon">类型</div>
                                         <select class="form-control" name="menuLevel" id="edit_menuLevel">
-                                            <option value="1">目录</option>
-                                            <option value="2">菜单</option>
-                                            <option value="3">按钮</option>
+                                            <option value=""></option>
                                         </select>
                                     </div>
                                 </div>
