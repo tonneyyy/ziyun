@@ -14,4 +14,6 @@ public interface DataMapper extends BaseMapper<Data, Integer> {
     List<Data> findAll();
 
     int existTypesName(String name);
+
+    List<Data> findData(int id);
 }

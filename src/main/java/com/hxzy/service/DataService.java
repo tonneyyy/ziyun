@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.service.BaseService;
 import com.hxzy.entity.Data;
-import com.hxzy.entity.Major;
+
+import java.util.List;
 
 /**
  * @author
@@ -17,4 +18,6 @@ public interface DataService extends BaseService<Data,Integer>{
     ResponseMessage findAll();
 
     JSONObject existTypesName(Data data);
+
+    List<Data> findData(int id);
 }
