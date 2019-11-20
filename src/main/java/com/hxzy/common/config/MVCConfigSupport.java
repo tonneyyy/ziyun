@@ -2,6 +2,7 @@ package com.hxzy.common.config;
 
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.MediaType;
@@ -20,6 +21,12 @@ import java.util.List;
 @Configuration
 @EnableAspectJAutoProxy
 public class MVCConfigSupport extends WebMvcConfigurationSupport {
+
+    @Value("${imgServer.url}")
+    private String imgServerMapping;  //映射地址
+    @Value("${imgServer.filePath}")
+    private String imgServerFilePath; //绝地目录
+
 
 
     //fastjson格式转换
@@ -47,13 +54,17 @@ public class MVCConfigSupport extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
+
 
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
 
+        //添加图片虚拟服务器            /imgServer/                                                  file:F:/imgserver/
+        registry.addResourceHandler(imgServerMapping+"**").addResourceLocations("file:"+imgServerFilePath);
+
+        super.addResourceHandlers(registry);
     }
 
     //自定义拦截器
@@ -66,6 +77,8 @@ public class MVCConfigSupport extends WebMvcConfigurationSupport {
     //支持跨域访问
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+
+
         registry.addMapping("/api/**")
                 //允许任何域名
                 .allowedOrigins("*")
