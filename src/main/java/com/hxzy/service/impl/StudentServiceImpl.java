@@ -56,18 +56,44 @@ public class StudentServiceImpl extends BaseServiceImpl<Student,Integer> impleme
         boolean result=false;
         //判断新增还是修改
         if(student.getId()==null ||  student.getId().equals("")){
-            Classes one = classesService.findOne(student.getClassesId());
-            if(one==null){
+            Classes classes = classesService.findOne(student.getClassesId());
+            if(classes==null){
                 return new ResponseMessage(ResponseCodeEnum.ERROR);
             }
-            //组装学生ID
-            String studentId=one.getRules()+one.getStartnum();
-            one.setStartnum(one.getStartnum()+1);
-            //更新学号开始数字
-            this.classesService.update(one);
-            //设置新增学生ID
-            student.setId(studentId);
-            result=this.studentMapper.insertSelective(student)>0;
+
+            //redis key规则
+            String redisKey="classes_"+classes.getId();
+
+            //前缀
+            String prefix=classes.getRules();
+            //自增数
+            int startNum=classes.getStartnum();
+
+            //判断redis中是否有缓存
+            Object rv=this.redisUtil.get(redisKey);
+            if(rv!=null){
+                startNum= Integer.parseInt(rv.toString());
+            }else{
+                redisUtil.set(redisKey,startNum+"");
+            }
+            //自增
+            startNum=(int)this.redisUtil.incr(redisKey);
+            //设置学生
+            if(startNum<10){
+                student.setId(prefix+"0"+startNum);
+            }else{
+                student.setId(prefix+startNum);
+            }
+
+            //开始新增
+            int i = this.studentMapper.insertSelective(student);
+
+            if(i>0){
+                classes.setStartnum(startNum);
+                result= this.classesService.updateSelective(classes);
+            }
+            String key="classes_"+classes.getId();
+            redisUtil.del(key);
         }else{
             result=this.studentMapper.updateSelective(student)>0;
         }

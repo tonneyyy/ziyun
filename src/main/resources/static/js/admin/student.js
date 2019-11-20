@@ -193,7 +193,7 @@ function initTable(){
 function portraitFormat(value,row,index){
     //状态
     if(value){
-        return "<img src='"+value+"' width='50'>";
+        return "<img src='http://192.168.20.89:8080"+value+"' width='50'>";
     }
 
     return "";
@@ -263,7 +263,7 @@ function initEvent() {
 
 
         var editor = K.editor({
-            uploadJson :  "http://192.168.20.89:8080/"+projectName+'/api/upload',  //配置文件上传路径
+            uploadJson :  "http://192.168.20.89:8080/api/upload",  //配置文件上传路径
             allowFileManager : false   //不允许查看服务器图片文件
         });
 
@@ -298,6 +298,11 @@ function addForm(){
     primaryKey="";
     //清空数据
     resetFormValue("#editForm input");
+    $("#edit_major option:first").prop("selected","selected");
+    $("#edit_classes option:first").prop("selected","selected");
+    $("#edit_education option:first").prop("selected","selected");
+    $("#edit_state option:first").prop("selected","selected");
+
     //重置验证规则
     $('#editForm').data('bootstrapValidator').resetForm(true);
     $("#myModalLabel").html("添加学生");

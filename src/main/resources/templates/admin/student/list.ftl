@@ -178,7 +178,9 @@
                             <div class="input-group">
                                 <div  class="input-group-addon">头像地址</div>
                                 <input type="text" class="form-control" id="edit_portrait" name="portrait"  placeholder="请输入头像地址..."   >
-                                 <button type="button"  id="btnChoose" class="btn btn-primary">选择头像</button>
+                                <div class="input-group-btn">
+                                    <button type="button"  id="btnChoose" class="btn btn-primary">选择头像</button>
+                                </div>
                             </div>
                         </div>
 
