@@ -3,16 +3,19 @@ package com.hxzy.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.search.PageSearch;
 import com.hxzy.common.service.impl.BaseServiceImpl;
 
+import com.hxzy.common.util.MD5Util;
 import com.hxzy.entity.Major;
 import com.hxzy.entity.Teacher;
 import com.hxzy.mapper.MajorMapper;
 import com.hxzy.mapper.TeacherMapper;
 import com.hxzy.service.TeacherService;
 import com.hxzy.vo.ResultData;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ import java.util.List;
  * @author xxx
  * @date 2019/11/16
  */
+@Log4j2
 @Service
 public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> implements TeacherService{
     @Autowired
@@ -72,8 +76,29 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
 
     @Override
     public ResponseMessage login(HttpSession session, Teacher teacher) {
+        Teacher dbTeacher=this.teacherMapper.findByName(teacher.getName());
 
-        return null;
+        if (dbTeacher==null){
+            log.error(teacher.getName()+",该用户不存在");
+            return new ResponseMessage(ResponseCodeEnum.USERNAME_PASSWORD_ERROR);
+        }else {
+            String mdPwd= MD5Util.MD5Encode(teacher.getPassword(),teacher.getSalt());
+            if (mdPwd.equals(dbTeacher.getPassword())){
+                if (dbTeacher.getState()==0){
+                    log.error(teacher.getName()+",该用户已别禁用");
+                    return new ResponseMessage(ResponseCodeEnum.USERNAME_Locked);
+                }else {
+                    teacher.setPassword(null);
+                    teacher.setId(dbTeacher.getId());
+                    session.setAttribute("currentThearch",teacher);
+                    return new ResponseMessage(ResponseCodeEnum.SUCCESS);
+                }
+            }else {
+                log.error(teacher.getName()+",密码输入错误");
+                return new ResponseMessage(ResponseCodeEnum.USERNAME_PASSWORD_ERROR);
+            }
+        }
+
     }
 
 

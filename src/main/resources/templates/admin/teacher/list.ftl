@@ -109,8 +109,8 @@
                             <div class="col-sm-10">
                                 <select class="selectpicker" id="edit_teachknowledge" name="knowledge"  multiple data-live-search="true">
                                     <option value="0">请选择</option>
-                                    <option value="1">1.java</option>
-                                    <option value="2">2.UI</option>
+                                    <option value="1">1.java开发</option>
+                                    <option value="2">2.Java大数据</option>
 
                                 </select>
 

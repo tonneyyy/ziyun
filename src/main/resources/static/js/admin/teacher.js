@@ -120,7 +120,7 @@ function stateFormatter(value,row,index){
     //
     if(value==1){
         return "<span class=\"label label-primary\">正常</span>";
-    }else {
+    }if (value==2) {
         return "<span class=\"label label-primary\">休假</span>";
     }
     return "<span class=\"label label-danger\">离职</span>";
@@ -317,8 +317,8 @@ function editForm(){
 
     $("#edit_name").val(data.name);
 
-    $("#edit_teachknowledge").val(data.teachKnowledge);
-    $('#edit_teachknowledge').selectpicker('refresh');
+     $("#edit_teachknowledge").val(data.teachKnowledge);
+     $('#edit_teachknowledge').selectpicker('refresh');
 
     $("#edit_mobile").val(data.mobile);
     $("#edit_sex").val(data.sex);
