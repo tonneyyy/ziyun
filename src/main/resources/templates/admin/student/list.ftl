@@ -112,7 +112,6 @@
                         <button type="button" class="btn btn-info" id="btnSelect" style="margin-left: 10px">查询</button>
                         <button type="button" class="btn btn-success" id="btnAdd" style="margin-left: 10px">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit" style="margin-left: 10px">编辑</button>
-                        <button type="button" class="btn btn-danger" id="btnEdit" style="margin-left: 10px">删除</button>
 
 
                         <a  class="btn btn-info" href="${ctx}/static/excel/student_import.xlsx" style="margin-left: 10px">下载模板</a>
