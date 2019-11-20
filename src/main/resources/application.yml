@@ -25,7 +25,6 @@ spring:
     request-context-attribute: request
     content-type: text/html;charset=utf-8
     suffix: .ftl  #坑
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.hxzy.entity
@@ -36,3 +35,9 @@ logging:
   level:
     com.hxzy: debug
     org.mybatis: debug
+
+
+# 配置虚拟图片服务器
+imgServer:
+  url: /imgServer/
+  filePath: F:/imgserver/

@@ -154,7 +154,7 @@ function initTable(){
                 field: 'portrait',
                 title:'头像地址',
                 valign: 'middle',
-                sortable: true
+                formatter:portraitFormat
             },{
                 field: 'mobile',
                 title:'手机号码',
@@ -189,6 +189,16 @@ function initTable(){
     });
 }
 
+//头像
+function portraitFormat(value,row,index){
+    //状态
+    if(value){
+        return "<img src='"+value+"' width='50'>";
+    }
+
+    return "";
+
+}
 
 //状态:1正常 2休学 3退学 格式化列
 function stateFormatter(value,row,index){
@@ -246,6 +256,35 @@ function initEvent() {
         ajaxLoadClass(majorId,classes);
 
     });
+
+
+    //图片插件
+    KindEditor.ready(function(K) {
+
+
+        var editor = K.editor({
+            uploadJson :  "http://192.168.20.89:8080/"+projectName+'/api/upload',  //配置文件上传路径
+            allowFileManager : false   //不允许查看服务器图片文件
+        });
+
+        K('#btnChoose').click(function() {
+            //加载图片插件
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    showRemote : false,
+                    imageUrl : K('#edit_portrait').val(),
+                    clickFn : function(url, title, width, height, border, align) {
+                        //上传完成以后url回调服务器地址
+                        K('#edit_portrait').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+
+
+
 }
 
 function searchStudent() {

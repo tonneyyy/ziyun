@@ -21,6 +21,9 @@
     <link href="${ctx}/static/js/plugins/validator/css/bootstrapValidator.css" rel="stylesheet">
     <!-- bootstrap-dialog 模态框框 -->
     <link href="${ctx}/static/js/plugins/dialog/css/bootstrap-dialog.css" rel="stylesheet">
+    <!-- kineditor -->
+    <link href="${ctx}/static/js/plugins/kindeditor/themes/default/default.css" rel="stylesheet">
+
     <link href="${ctx}/static/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
@@ -174,7 +177,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div  class="input-group-addon">头像地址</div>
-                                <input type="text" class="form-control" id="edit_portrait" name="portrait"  placeholder="请输入头像地址..."  data-bv-trigger="blur" >
+                                <input type="text" class="form-control" id="edit_portrait" name="portrait"  placeholder="请输入头像地址..."   >
+                                 <button type="button"  id="btnChoose" class="btn btn-primary">选择头像</button>
                             </div>
                         </div>
 
@@ -311,6 +315,11 @@
 
 <!-- bootstrap-dialog模态框 -->
 <script src="${ctx }/static/js/plugins/dialog/js/bootstrap-dialog.min.js"></script>
+
+<!-- kineditor -->
+<script src="${ctx }/static/js/plugins/kindeditor/kindeditor-all.js"></script>
+<script src="${ctx }/static/js/plugins/kindeditor/lang/zh-CN.js"></script>
+
 <!-- 自定义js -->
 <script src="${ctx }/static/js/content.js?v=1.0.0"></script>
 
