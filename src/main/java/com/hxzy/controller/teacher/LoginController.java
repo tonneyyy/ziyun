@@ -1,32 +1,29 @@
-package com.hxzy.controller.admin;
+package com.hxzy.controller.teacher;
 
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.entity.Teacher;
 import com.hxzy.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
-@RequestMapping(value = "/admin")
+@Controller(value = "teaLoginController")
+@RequestMapping("/teacher")
 public class LoginController {
 
     @Autowired
-    public TeacherService teacherService;
+    private TeacherService teacherService;
 
-    //后台登录界面
     @GetMapping(value = "/login")
-    public String login(Model model){
-        System.out.println("进入了控制器-----------");
-        return "admin/login";
+    public String login(){
+        return "teacher/login";
     }
-
     @ResponseBody
     @PostMapping(value = "/loginExecute")
     public ResponseMessage loginExecute(HttpSession session, Teacher teacher,@RequestParam("account") String name){
         return this.teacherService.login(session,teacher,name);
     }
+
 }

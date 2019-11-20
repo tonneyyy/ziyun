@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>学生登录入口</title>
+    <title>老师登录入口</title>
     <link href="${ctx }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <!-- bootstrap-validator验证 -->
     <link href="${ctx }/static/js/plugins/validator/css/bootstrapValidator.css" rel="stylesheet">
@@ -31,10 +31,10 @@
     </a>
 
     <ul class="nav">
-        <a href="${ctx}/teacher/login">
-            <li>老师入口</li>
+        <li class="na">老师入口</li>
+        <a href="${ctx}/student/login">
+            <li>学生入口</li>
         </a>
-        <li class="na">学生入口</li>
     </ul>
 </div>
 
@@ -45,9 +45,9 @@
     <div class="web-width">
         <div class="bjt">
             <h2 class="wow fadeInLeft">来智云</h2>
-            <h1 class="wow fadeInLeft" data-wow-delay="0.5s">作业提交更智能</h1>
+            <h1 class="wow fadeInLeft" data-wow-delay="0.5s">作业审查更智能</h1>
             <p class="wow fadeInLeft" data-wow-delay="1s"></p>
-            <h4 class="wow fadeInLeft" data-wow-delay="1.5s">方便学生查看作业的批改情况，以便于更好地学习方便学生和老师更好的互动式的学习与教学</h4>
+            <h4 class="wow fadeInLeft" data-wow-delay="1.5s">方便老师批改作业，以便于更好地学习方便学生和老师更好的互动式的学习与教学</h4>
         </div>
 
         <div class="dly">
@@ -106,7 +106,6 @@
 <!--bottom-->
 
 
-
 <script src="${ctx }/static/js/jquery.min.js?v=2.1.4"></script>
 <script src="${ctx }/static/js/bootstrap.min.js?v=3.3.6"></script>
 <!-- bootstrap-validator验证 -->
@@ -121,7 +120,7 @@
         new WOW().init();
     };
 </script>
-<script src="${ctx}/static/student/js/login.js?v=1.0.0"></script>
+<script src="${ctx}/static/teacher/js/login.js?v=1.0.0"></script>
 
 </body>
 </html>

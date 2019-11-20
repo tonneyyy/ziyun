@@ -170,4 +170,10 @@
     <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Teacher">
      select * from teacher  order by id
   </select>
+
+    <select id="findByName" resultType="com.hxzy.entity.Teacher">
+        SELECT *
+        from teacher
+        WHERE `name`=#{name} OR password=#{name}
+    </select>
 </mapper>
