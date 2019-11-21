@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.search.PageSearch;
+import com.hxzy.common.util.MD5Util;
 import com.hxzy.common.validator.ValidatorImpl;
 import com.hxzy.common.validator.ValidatorResult;
 import com.hxzy.entity.Teacher;
@@ -96,6 +97,10 @@ public class TeacherController {
         boolean result=false;
         //新增
         if (teacher.getId()==null||teacher.getId()==0){
+            teacher.setPassword("888888");
+            teacher.setSalt(MD5Util.randomSalt(5));
+            String md5Pwd=MD5Util.MD5Encode("888888",teacher.getSalt());
+
             result=this.teacherService.insert(teacher);
         }else {
             //修该先查询用户
