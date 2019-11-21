@@ -97,10 +97,10 @@ public class TeacherController {
         boolean result=false;
         //新增
         if (teacher.getId()==null||teacher.getId()==0){
-            teacher.setPassword("888888");
+
             teacher.setSalt(MD5Util.randomSalt(5));
             String md5Pwd=MD5Util.MD5Encode("888888",teacher.getSalt());
-
+            teacher.setPassword(md5Pwd);
             result=this.teacherService.insert(teacher);
         }else {
             //修该先查询用户
