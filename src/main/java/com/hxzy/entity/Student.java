@@ -2,7 +2,10 @@ package com.hxzy.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Author: Administrator
@@ -54,6 +57,8 @@ public class Student implements Serializable {
     /**
      * 入学日期
      */
+    //spring的网页来接收日期参数的格式，如果不设定会报400错误
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date joinDate;
 
     /**
@@ -64,6 +69,8 @@ public class Student implements Serializable {
     /**
      * 出生年月
      */
+    //spring的网页来接收日期参数的格式，如果不设定会报400错误
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
 
     /**
