@@ -81,7 +81,7 @@
                                 <input type="button" id="btnLogin" class="btn btn-success btn-block" value="登录" >
                                 <div class="dll">
                                     <div class="zd"><input type="checkbox" value="dl" id="dl" checked="checked"/><label for="dl">下次自动登录</label></div>
-                                    <div class="wj"><a href="#">忘记密码</a>｜<a href="index.html">注册</a></div>
+                                    <div class="wj"><a href="#">忘记密码</a>｜<a href="${ctx}/register/index">注册</a></div>
                                 </div>
                                 <div class="dsf">
                                     <p>第三方账号登录</p>
@@ -104,7 +104,7 @@
     </div><!--web-width/-->
 </div><!--content/-->
 <!--bottom-->
-
+<#include "../common/bottom2.ftl">
 
 
 <script src="${ctx }/static/js/jquery.min.js?v=2.1.4"></script>
