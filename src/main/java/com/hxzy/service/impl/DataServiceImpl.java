@@ -59,4 +59,9 @@ public class DataServiceImpl extends BaseServiceImpl<Data,Integer> implements Da
         mp.put("valid",result);
         return mp;
     }
+
+    @Override
+    public List<Data> findData(int id) {
+        return this.dataMapper.findData(id);
+    }
 }

@@ -5,13 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <title>学生登录入口</title>
-    <!--动画-->
-    <link rel="stylesheet" href="${ctx }/static/student/css/animate.css" type="text/css"/>
+    <link href="${ctx }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <!-- bootstrap-validator验证 -->
+    <link href="${ctx }/static/js/plugins/validator/css/bootstrapValidator.css" rel="stylesheet">
+    <!-- bootstrap-dialog 模态框框 -->
+    <link href="${ctx }/static/js/plugins/dialog/css/bootstrap-dialog.css" rel="stylesheet">
+
     <!---->
     <link type="text/css" href="${ctx }/static/student/css/css.css" rel="stylesheet" />
+    <link href="${ctx }/static/css/login.css" rel="stylesheet">
+    <!--动画-->
+    <link rel="stylesheet" href="${ctx }/static/student/css/animate.css" type="text/css"/>
+
+
+
 </head>
 
-<body>
+<body data-project="${ctx}">
 <!--top-->
 <div class="yxq">
     <a href="../页面/index.html">
@@ -21,7 +31,7 @@
     </a>
 
     <ul class="nav">
-        <a href="../内页/wode_dpg_ls.html">
+        <a href="${ctx}/teacher/login">
             <li>老师入口</li>
         </a>
         <li class="na">学生入口</li>
@@ -37,34 +47,41 @@
             <h2 class="wow fadeInLeft">来智云</h2>
             <h1 class="wow fadeInLeft" data-wow-delay="0.5s">作业提交更智能</h1>
             <p class="wow fadeInLeft" data-wow-delay="1s"></p>
-            <h3 class="wow fadeInLeft" data-wow-delay="1.5s">方便学生查看作业的批改情况，以便于更好地学习方便学生和老师更好的互动式的学习与教学</h3>
+            <h4 class="wow fadeInLeft" data-wow-delay="1.5s">方便学生查看作业的批改情况，以便于更好地学习方便学生和老师更好的互动式的学习与教学</h4>
         </div>
 
-
-
         <div class="dly">
-            <form method="get" class="forget-pwd for">
-                <div class="tab" js-tab="1">
+            <form method="get" class="forget-pwd for" id="editForm" onsubmit="return false;">
+
+                <div  class="form-group" js-tab="1" id="form-group">
                     <div class="tab-title">
                         <a href="javascript:;" class="item item-cur">密码登录</a>
-
                     </div>
                     <div class="tab-cont">
                         <ul class="tab-cont__wrap">
-
                             <li class="item">
                                 <dl class="dlj">
-                                    <dd><input type="text" placeholder="账号 / 手机号 / 邮箱"/></dd>
-                                    <div class="clears"></div>
+                                    <dd>
+                                        <div class="form-group">
+                                            <div>
+                                                <input type="text" class="form-control uname" id="account"  name="account" placeholder="用户名/手机号" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </dd>
                                 </dl>
                                 <dl  class="dlj">
-                                    <dd><input type="password" placeholder="请输入正确的密码" /></dd>
-                                    <div class="clears"></div>
+                                    <dd>
+                                        <div class="form-group">
+                                            <div>
+                                                <input type="password" class="form-control pword m-b" id="password"  name="password" placeholder="密码">
+                                            </div>
+                                        </div>
+                                    </dd>
                                 </dl>
-                                <a href="../页面/index -已登录.html"><div class="subtijiao jj">登录</div></a>
+                                <input type="button" id="btnLogin" class="btn btn-success btn-block" value="登录" >
                                 <div class="dll">
                                     <div class="zd"><input type="checkbox" value="dl" id="dl" checked="checked"/><label for="dl">下次自动登录</label></div>
-                                    <div class="wj"><a href="#">忘记密码</a>｜<a href="index.html">注册</a></div>
+                                    <div class="wj"><a href="#">忘记密码</a>｜<a href="${ctx}/register/index">注册</a></div>
                                 </div>
                                 <div class="dsf">
                                     <p>第三方账号登录</p>
@@ -76,7 +93,6 @@
 
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -88,20 +104,16 @@
     </div><!--web-width/-->
 </div><!--content/-->
 <!--bottom-->
-<div class="bottom">
-    <ul class="tm">
-        <li>智云</li>
-        <li>帮助中心</li>
-        <li>学习中心</li>
-        <li class="yq">友情链接</li>
-    </ul>
-    <h6>DT人才培训基地（重庆中心）&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;晋ICP备16009028号&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;咨询热线：400-7777-699&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;地址：重庆渝中区文化宫6F&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;版权所有：华信智原</h6>
-</div>
+<#include "../common/bottom2.ftl">
 
 
-
-<script src="${ctx }/static/student/js/jquery-1.8.3.min.js"></script>
-
+<script src="${ctx }/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="${ctx }/static/js/bootstrap.min.js?v=3.3.6"></script>
+<!-- bootstrap-validator验证 -->
+<script src="${ctx }/static/js/plugins/validator/js/bootstrapValidator.js"></script>
+<script src="${ctx }/static/js/plugins/validator/js/language/zh_CN.js"></script>
+<!-- bootstrap-dialog模态框 -->
+<script src="${ctx }/static/js/plugins/dialog/js/bootstrap-dialog.min.js"></script>
 <!--动画-->
 <script src="${ctx }/static/student/js/wow.min.js"></script>
 <script>
@@ -109,6 +121,7 @@
         new WOW().init();
     };
 </script>
+<script src="${ctx}/static/student/js/login.js?v=1.0.0"></script>
 
 </body>
 </html>

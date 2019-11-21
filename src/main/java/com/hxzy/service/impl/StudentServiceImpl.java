@@ -139,6 +139,7 @@ public class StudentServiceImpl extends BaseServiceImpl<Student,Integer> impleme
     //批量插入
     private boolean batchInsertStudent(List<Student> arrList, int classesId) {
         int result=this.studentMapper.insertBatch(arrList);
+        String key="classes_"+classesId;
         if(result>0){
             //更新班级数据库的值
             Classes  classes=new Classes();
@@ -149,9 +150,15 @@ public class StudentServiceImpl extends BaseServiceImpl<Student,Integer> impleme
             Object redisValue=this.redisUtil.get(redisKey);
             classes.setStartnum(Integer.parseInt(redisValue.toString()));
             boolean resultUpdate=this.classesService.updateSelective(classes);
+            //删除key
+            redisUtil.del(key);
             return resultUpdate;
+        }else {
+            //失败一定要删除key
+            redisUtil.del(key);
+            return false;
         }
-        return false;
+
     }
 
     private List<Student> readExcelContent(int majorId, int classesId, MultipartFile attach) throws RuntimeException{

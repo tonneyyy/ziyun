@@ -21,5 +21,5 @@ public interface TeacherService extends BaseService<Teacher,Integer> {
      */
     JSONObject existName(Teacher teacher);
 
-    ResponseMessage login(HttpSession session, Teacher teacher);
+    ResponseMessage login(HttpSession session, Teacher teacher,String name);
 }

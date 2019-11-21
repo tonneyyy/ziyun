@@ -193,7 +193,7 @@ function initTable(){
 function portraitFormat(value,row,index){
     //状态
     if(value){
-        return "<img src='http://192.168.20.89:8080"+value+"' width='50'>";
+        return "<img src='"+value+"' width='50'>";
     }
 
     return "";
@@ -212,7 +212,7 @@ function stateFormatter(value,row,index){
     return "<span class=\"label label-danger\">退学</span>";
 
 }
-
+//学历
 function educationFormatter(value,row,index) {
     if(value==4){
         return "<span class=\"label label-success\">研究生</span>";
@@ -227,13 +227,12 @@ function educationFormatter(value,row,index) {
 }
 
 
-
 function initEvent() {
     //查询专业选择事件
     $("#search_major").change(function () {
         let majorId =$(this).val();
         //获取班级列表元素
-        let classes=$("#edit_classes");
+        let classes=$("#search_classes");
         //清空班级列表内容
         classes.find("option:gt(0)").remove();
         ajaxLoadClass(majorId,classes);
@@ -254,7 +253,6 @@ function initEvent() {
         //清空班级列表内容
         classes.find("option:gt(0)").remove();
         ajaxLoadClass(majorId,classes);
-
     });
 
 
@@ -263,7 +261,7 @@ function initEvent() {
 
 
         var editor = K.editor({
-            uploadJson :  "http://192.168.20.89:8080/api/upload",  //配置文件上传路径
+            uploadJson :  projectName+"/api/upload",  //配置文件上传路径
             allowFileManager : false   //不允许查看服务器图片文件
         });
 
@@ -298,6 +296,10 @@ function addForm(){
     primaryKey="";
     //清空数据
     resetFormValue("#editForm input");
+    //获取班级列表元素
+    let classes=$("#edit_classes");
+    //清空班级列表内容
+    classes.find("option:gt(0)").remove();
     $("#edit_major option:first").prop("selected","selected");
     $("#edit_classes option:first").prop("selected","selected");
     $("#edit_education option:first").prop("selected","selected");
@@ -361,6 +363,25 @@ function editForm(){
         });
         return;
     }
+    let date=new Date(rows[0]["joinDate"]).getTime();
+
+
+
+
+
+    let halfYear=getHalfYearAgoDate();
+
+
+
+
+    if(halfYear>date){
+        BootstrapDialog.show({
+            title: '提示',
+            type: BootstrapDialog.TYPE_DANGER,
+            message:"请选择最近半年的学生"
+        });
+        return;
+    }
 
     //清空数据
     resetFormValue("#editForm input");
@@ -401,6 +422,17 @@ function editForm(){
     $('#myModal').modal('show');
 }
 
+//获取当前日期半年前日期
+function getHalfYearAgoDate(){
+    let curDate = (new Date()).getTime();
+    // 将半年的时间单位换算成毫秒
+    let halfYear = 365 / 2 * 24 * 3600 * 1000;
+    let result = curDate - halfYear;  // 半年前的时间（毫秒单位）
+
+    return result;
+}
+
+
 //组装对象数据
 function getClasses() {
     //组装对象
@@ -411,15 +443,18 @@ function getClasses() {
         classesId : $("#edit_classes").val(),
         portrait:$("#edit_portrait").val(),
         mobile :$("#edit_mobile").val(),
-        joinDate:function () {
-            let date=$("#edit_joinDate").val().substr(0,10).replace(/-/g,"/");
-            return new Date(date);
-        },
+        joinDate:$("#edit_joinDate").val(),
+
+        // joinDate:function () {
+        //     let date=$("#edit_joinDate").val().substr(0,10).replace(/-/g,"/");
+        //     return new Date(date);
+        // },
         sex :$("#edit_sex").val(),
-        birthday:function () {
-            let date=$("#edit_birthday").val().substr(0,10).replace(/-/g,"/");
-            return new Date(date);
-        },
+        birthday:$("#edit_birthday").val(),
+        // birthday:function () {
+        //     let date=$("#edit_birthday").val().substr(0,10).replace(/-/g,"/");
+        //     return new Date(date);
+        // },
         education:$("#edit_education").val(),
         schoolName:$("#edit_schoolName").val(),
         collegeMajor:$("#edit_collegeMajor").val(),
@@ -461,8 +496,6 @@ function saveFormData(){
 function asyncSaveData(){
     //验证通过
     let data=getClasses();
-    console.log(data);
-
     //ajax提交数据
     $.ajax({
         type:"POST",
