@@ -120,7 +120,7 @@ function stateFormatter(value,row,index){
     //
     if(value==1){
         return "<span class=\"label label-primary\">正常</span>";
-    }else {
+    }if (value==2) {
         return "<span class=\"label label-primary\">休假</span>";
     }
     return "<span class=\"label label-danger\">离职</span>";
@@ -166,11 +166,12 @@ function addForm(){
     //清空数据
     resetFormValue("#editForm input ");
     $("select").val("0");
+    $($("#edit_teachknowledge")).selectpicker('val',['noneSelectedText']);
 
     //重置验证规则
     $('#editForm').data('bootstrapValidator').resetForm(true);
 
-
+    // $("#pwd").hide();
     $("#myModalLabel").html("添加数据");
     //显示模态框
     $('#myModal').modal('show');
@@ -253,7 +254,7 @@ function asyncSaveData(){
     //主键加进去
     saveData+="&id="+primaryKey;
 
-    console.log(saveData);
+
 
     //ajax提交数据
     $.ajax({
@@ -283,7 +284,7 @@ function asyncSaveData(){
 //编辑操作
 function editForm(){
 
-    $("#pwd").hide();
+   // $("#pwd").hide();
     //判断你是否选中有要修改的数据
     var rows=$('#tb').bootstrapTable('getSelections');
 
@@ -317,8 +318,13 @@ function editForm(){
 
     $("#edit_name").val(data.name);
 
-    $("#edit_teachknowledge").val(data.teachKnowledge);
-    $('#edit_teachknowledge').selectpicker('refresh');
+
+     if(data.teachKnowledge){
+         $('#edit_teachknowledge').selectpicker('val', data.teachKnowledge.split(","));
+     }else{
+         $('#edit_teachknowledge').selectpicker('deselectAll');
+     }
+
 
     $("#edit_mobile").val(data.mobile);
     $("#edit_sex").val(data.sex);
@@ -326,6 +332,10 @@ function editForm(){
     $("#edit_mobile").val(data.mobile);
     $("#edit_education").val(data.education);
     $("#edit_state").val(data.state);
+
+
+
+
 
 
 

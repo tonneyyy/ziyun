@@ -75,8 +75,7 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
     }
 
     @Override
-    public ResponseMessage login(HttpSession session, Teacher teacher, String name) {
-
+    public ResponseMessage login(HttpSession session, Teacher teacher,String name) {
         //1、先根据用户名查询用户
         Teacher dbTeacher= this.teacherMapper.findByName(name);
         if(dbTeacher==null){
@@ -106,7 +105,6 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
                 return new ResponseMessage(ResponseCodeEnum.USERNAME_PASSWORD_ERROR);
             }
         }
-
     }
 
 

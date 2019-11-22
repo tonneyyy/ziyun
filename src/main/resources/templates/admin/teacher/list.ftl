@@ -96,21 +96,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="pwd">
-                            <label  class="col-sm-2 control-label">您的密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="edit_password" name="password"  data-bv-trigger="blur"   placeholder="密码 ">
-                            </div>
-                        </div>
+
 
 
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">专业</label>
                             <div class="col-sm-10">
-                                <select class="selectpicker" id="edit_teachknowledge" name="knowledge"  multiple data-live-search="true">
-                                    <option value="0">请选择</option>
-                                    <option value="1">1.java</option>
-                                    <option value="2">2.UI</option>
+                                <select class="selectpicker" id="edit_teachknowledge" name="knowledge"  multiple data-live-search="true" ">
+                                    <option value="1">1.java开发</option>
+                                    <option value="2">2.Java大数据</option>
+                                    <option value="3">3.UI</option>
+                                    <option value="4">4.UE</option>
+                                    <option value="5">5.网路营销</option>
+                                    <option value="5">6.新媒体</option>
+
 
                                 </select>
 
@@ -208,6 +207,7 @@
 <script src="${ctx }/static/js/content.js?v=1.0.0"></script>
 
 <script src="${ctx }/static/js/plugins/bootstrap-select-1.13.0-dev/dist/js/bootstrap-select.min.js"></script>
+<#--<script src="${ctx }/static/js/plugins/bootstrap-select-1.13.0-dev/dist/js/i18n/defaults-*.js"></script>-->
 
 
 

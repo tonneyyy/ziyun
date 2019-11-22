@@ -22,7 +22,7 @@ public class LoginController {
     }
     @ResponseBody
     @PostMapping(value = "/loginExecute")
-    public ResponseMessage loginExecute(HttpSession session, Teacher teacher,@RequestParam("account") String name){
+    public ResponseMessage loginExecute(HttpSession session, Teacher teacher,@RequestParam(name="account") String name){
         return this.teacherService.login(session,teacher,name);
     }
 

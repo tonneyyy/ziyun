@@ -40,4 +40,4 @@ logging:
 # 配置虚拟图片服务器
 imgServer:
   url: /imgServer/
-  filePath: F:/imgserver/
+  filePath: E:/imgserver/
