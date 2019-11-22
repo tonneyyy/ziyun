@@ -169,8 +169,10 @@ public class StudentServiceImpl extends BaseServiceImpl<Student,Integer> impleme
         style2.setBorderTop(BorderStyle.THIN);
         style2.setAlignment(HorizontalAlignment.CENTER);
         style2.setVerticalAlignment(VerticalAlignment.CENTER);
-        font.setBold(false);
-        style2.setFont(font);
+        Font font2 = wb.createFont();
+        font2.setFontHeightInPoints((short) 12);
+        font2.setBold(false);
+        style2.setFont(font2);
         //第一行列名
         String[] nameList={"学号","入学日期","姓名","性别","出生年月","学历","毕业学校","专业","班级","身份证号码","手机号码","QQ号码","家庭住址","现住地址"};
         XSSFRow row = sheet.createRow(0);
