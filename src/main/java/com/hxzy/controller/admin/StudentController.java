@@ -3,6 +3,8 @@ package com.hxzy.controller.admin;
 import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.search.PageSearch;
+import com.hxzy.common.util.DateUtil;
+import com.hxzy.common.util.RedisUtil;
 import com.hxzy.common.validator.ValidatorImpl;
 import com.hxzy.common.validator.ValidatorResult;
 import com.hxzy.entity.Major;
@@ -11,6 +13,10 @@ import com.hxzy.service.MajorService;
 import com.hxzy.service.StudentService;
 import com.hxzy.vo.ResultData;
 import com.hxzy.vo.StudentSearch;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -115,6 +124,29 @@ public class StudentController {
 
              return "admin/student/batchImport";
          }
+    }
+
+    /**
+     * 导出查询数据
+     * @param studentSearch
+     * @return
+     */
+    @PostMapping(value = "/student/importSearch/download")
+    public void excelImportSearch(StudentSearch studentSearch, HttpServletResponse response){
+        XSSFWorkbook wb = this.studentService.searchAll(studentSearch);
+
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        OutputStream os = null;
+        try {
+            os = response.getOutputStream();
+            response.setHeader("Content-disposition", "attachment;filename=StudentInfo.xlsx");//默认Excel名称
+            wb.write(os);
+            os.flush();
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

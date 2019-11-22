@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-inline" id="searchForm">
+                    <form class="form-inline" id="searchForm" action="/admin/student/importSearch/download" method="post" >
                         <div class="panel">
                             <div class="form-group">
                                 <div class="input-group">
@@ -109,10 +109,10 @@
 
 
 
-                        <button type="button" class="btn btn-info" id="btnSelect" style="margin-left: 10px">查询</button>
+                        <button type="button" class="btn btn-danger" id="btnSelect" style="margin-left: 10px">查询</button>
+                        <button type="submit" class="btn btn-warning" id="importSearch" style="margin-left: 10px">导出表格</button>
                         <button type="button" class="btn btn-success" id="btnAdd" style="margin-left: 10px">新增</button>
                         <button type="button" class="btn btn-primary" id="btnEdit" style="margin-left: 10px">编辑</button>
-
 
                         <a  class="btn btn-info" href="${ctx}/static/excel/student_import.xlsx" style="margin-left: 10px">下载模板</a>
                         <a   class="btn btn-success"  href="${ctx}/admin/student/import" style="margin-left: 10px">导入学生信息</a>

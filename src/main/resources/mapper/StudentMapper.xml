@@ -24,6 +24,25 @@
     <result column="currentAddress" jdbcType="VARCHAR" property="currentAddress" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+
+  <resultMap id="BaseResultExcelStudent" type="com.hxzy.vo.ExcelStudent">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <!--数据库不存在该字段 专业名称-->
+    <result column="majorName" jdbcType="INTEGER" property="majorName" />
+    <!--数据库不存在该字段 班级名称-->
+    <result column="className" jdbcType="INTEGER" property="className" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="joinDate" jdbcType="DATE" property="joinDate" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="education" jdbcType="INTEGER" property="education" />
+    <result column="schoolName" jdbcType="VARCHAR" property="schoolName" />
+    <result column="idCard" jdbcType="VARCHAR" property="idCard" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="homeAddress" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="currentAddress" jdbcType="VARCHAR" property="currentAddress" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, `name`, majorId, classesId, portrait, mobile, joinDate, sex, birthday, education, 
     schoolName, collegeMajor, idCard, qq, homeAddress, currentAddress, `state`
@@ -268,5 +287,62 @@
         #{p.state,jdbcType=INTEGER})
     </foreach>
   </insert>
+
+
+  <select id="searchAll"  parameterType="com.hxzy.vo.StudentSearch" resultMap="BaseResultExcelStudent">
+    SELECT
+    s.id,
+    s.`name`,
+    s.`majorId`,
+    m.`name` AS majorName,
+    s.`classesId`,
+    c.`name` AS className,
+    s.portrait,
+    s.mobile,
+    s.joinDate,
+    s.sex,
+    s.birthday,
+    s.education,
+    s.schoolName,
+    s.collegeMajor,
+    s.idCard,
+    s.qq,
+    s.homeAddress,
+    s.currentAddress,
+    s.state
+    FROM
+    student AS s
+    INNER JOIN classes AS c ON s.classesId = c.id
+    INNER JOIN major AS m ON s.majorId = m.id
+    where 1=1
+    <if test="id != null and id!='' ">
+      and s.id like concat('%',#{id},'%')
+    </if>
+    <if test="name != null and name!='' ">
+      and s.`name` like concat('%',#{name},'%')
+    </if>
+    <if test="majorId != null and majorId > 0 and majorId!='' ">
+      and s.majorId = #{majorId}
+    </if>
+
+    <if test="classesId != null and classesId >0 and classesId!='' ">
+      and s.classesId = #{classesId}
+    </if>
+
+    <if test="mobile != null and mobile!=''" >
+      and s.mobile like concat('%',#{mobile},'%')
+    </if>
+
+    <if test='sex == "男" or sex == "女"' >
+      and s.sex =#{sex}
+    </if>
+
+    <if test="state != null and state > 0" >
+      and s.state = #{state}
+    </if>
+
+    order by id
+
+  </select>
 
 </mapper>

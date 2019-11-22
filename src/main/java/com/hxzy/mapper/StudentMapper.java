@@ -2,6 +2,8 @@ package com.hxzy.mapper;
 
 import com.hxzy.common.mapper.BaseMapper;
 import com.hxzy.entity.Student;
+import com.hxzy.vo.ExcelStudent;
+import com.hxzy.vo.StudentSearch;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,4 +20,6 @@ public interface StudentMapper extends BaseMapper<Student,Integer> {
      * @return
      */
     int insertBatch(List<Student> list);
+
+    List<ExcelStudent> searchAll(StudentSearch studentSearch);
 }

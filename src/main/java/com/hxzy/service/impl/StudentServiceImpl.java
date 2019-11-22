@@ -3,30 +3,29 @@ package com.hxzy.service.impl;
 import com.hxzy.common.bean.ResponseCodeEnum;
 import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.service.impl.BaseServiceImpl;
+import com.hxzy.common.util.DateUtil;
 import com.hxzy.common.util.RedisUtil;
 import com.hxzy.entity.Classes;
 import com.hxzy.entity.Student;
 import com.hxzy.mapper.StudentMapper;
 import com.hxzy.service.ClassesService;
 import com.hxzy.service.StudentService;
+import com.hxzy.vo.ExcelStudent;
+import com.hxzy.vo.StudentSearch;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Log4j2
 @Service
@@ -134,6 +133,103 @@ public class StudentServiceImpl extends BaseServiceImpl<Student,Integer> impleme
 
         }
         return rm;
+    }
+
+    @Override
+    public XSSFWorkbook searchAll(StudentSearch studentSearch) {
+        //创建excel
+        XSSFWorkbook wb = new XSSFWorkbook();
+        //创建工作表(Sheet)
+        XSSFSheet sheet = wb.createSheet("sheet1");
+        //设置列宽
+        sheet.setDefaultColumnWidth(20);
+        //设置行高
+        sheet.setDefaultRowHeight((short) (16.5 * 25));
+        List<ExcelStudent> students = this.studentMapper.searchAll(studentSearch);
+        if(students==null){
+            return wb;
+        }
+        //样式设置
+        CellStyle style = wb.createCellStyle();
+        style.setFillForegroundColor(IndexedColors.AQUA.getIndex());//背景颜色
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);//填充图案
+        style.setBorderBottom(BorderStyle.THIN);   //边框
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderTop(BorderStyle.THIN);
+        style.setAlignment(HorizontalAlignment.CENTER);//对齐方式
+        Font font = wb.createFont();
+//        font.setColor(IndexedColors.WHITE.getIndex());//字体颜色
+        font.setFontHeightInPoints((short) 12);
+        font.setBold(true);
+        style.setFont(font); // 把字体应用到当前的样式
+        CellStyle style2 = wb.createCellStyle();
+        style2.setBorderBottom(BorderStyle.THIN);
+        style2.setBorderLeft(BorderStyle.THIN);
+        style2.setBorderRight(BorderStyle.THIN);
+        style2.setBorderTop(BorderStyle.THIN);
+        style2.setAlignment(HorizontalAlignment.CENTER);
+        style2.setVerticalAlignment(VerticalAlignment.CENTER);
+        font.setBold(false);
+        style2.setFont(font);
+        //第一行列名
+        String[] nameList={"学号","入学日期","姓名","性别","出生年月","学历","毕业学校","专业","班级","身份证号码","手机号码","QQ号码","家庭住址","现住地址"};
+        XSSFRow row = sheet.createRow(0);
+        //设置每列宽度
+        int[] width = {18*256,16*256,12*256,8*256,15*256,12*256,15*256,12*256,12*256,25*256,16*256,15*256,30*256,30*256};
+        for (int i = 0; i < nameList.length; i++) {
+            XSSFCell cell=row.createCell(i);
+            cell.setCellValue(nameList[i]);
+            cell.setCellStyle(style);
+            sheet.setColumnWidth(i,width[i]);
+        }
+        List<Map<Integer,Object>> values=new ArrayList<>();
+        for (ExcelStudent student : students) {
+            Map<Integer,Object> map=new HashMap<>();
+            map.put(0,student.getId());
+            map.put(1,student.getJoinDate());
+            map.put(2,student.getName());
+            map.put(3,student.getSex());
+            map.put(4,student.getBirthday());
+            map.put(5,student.getEducation());
+            map.put(6,student.getSchoolName());
+            map.put(7,student.getMajorName());
+            map.put(8,student.getClassName());
+            map.put(9,student.getIdCard());
+            map.put(10,student.getMobile());
+            map.put(11,student.getQq());
+            map.put(12,student.getHomeAddress());
+            map.put(13,student.getCurrentAddress());
+            values.add(map);
+        }
+
+        for (int i = 0; i < values.size() ; i++) {
+            row = sheet.createRow(i+1);
+            Map<Integer, Object> objectMap = values.get(i);
+            for (int j = 0; j < objectMap.size() ; j++) {
+                XSSFCell cell = row.createCell(j);
+                cell.setCellStyle(style2);
+                Object value = objectMap.get(j);
+                if(value instanceof  String){
+                    cell.setCellValue((String) value);
+                }else if (value instanceof Date) {
+                    cell.setCellValue(DateUtil.dateToString((Date)value));
+                }else if(value instanceof Integer){
+                    String education="";
+                    if((int)value==1){
+                        education="本科";
+                    }else if((int)value==2){
+                        education="专科";
+                    }else if((int)value==3){
+                        education="专科以下";
+                    }else if((int)value==4){
+                        education="研究生";
+                    }
+                    cell.setCellValue(education);
+                }
+            }
+        }
+        return wb;
     }
 
     //批量插入
