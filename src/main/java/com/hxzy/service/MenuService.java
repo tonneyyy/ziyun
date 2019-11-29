@@ -16,10 +16,10 @@ public interface MenuService  extends BaseService<Menu,Integer> {
 
     /**
      * 加载菜单
-     * @param userId
+     * @param teacherId
      * @return
      */
-    List<MenuVO> loadUserMenu(int userId);
+    List<MenuVO> findTeacherMenu(int teacherId);
 
     List<Menu> findByParentId(Integer parentId);
 

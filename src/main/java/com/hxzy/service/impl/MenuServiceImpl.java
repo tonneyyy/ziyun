@@ -36,9 +36,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
     //要把数据库值转换成二级目录
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<MenuVO> loadUserMenu(int userId) {
+    public List<MenuVO> findTeacherMenu(int teacherId) {
         //1、查询用户拥有的菜单
-        List<Menu>  ownMenuList=this.menuMapper.loadUserMenu(userId);
+        List<Menu>  ownMenuList=this.menuMapper.findTeacherMenu(teacherId);
 
         //2、最终要完成的就要把数据库值，变为我们想要的二级节点
         List<MenuVO>  newList=new ArrayList<>();

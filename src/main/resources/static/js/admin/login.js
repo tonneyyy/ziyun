@@ -61,7 +61,7 @@ function loginExecute(){
     //2、写ajax
     $.ajax({
         type:"POST",
-        url:projectName+"/admin/loginExecute",
+        url:projectName+"/admin/loginValidator",
         data:dataStr,
         dataType:"json",
         success:function(resp){

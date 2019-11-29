@@ -15,7 +15,6 @@ public enum ResponseCodeEnum {
     USERNAME_PASSWORD_ERROR(100002,"用户名或密码错误!"),
     USERNAME_Locked(100003,"用户账户被锁定，请<a href='/admin/findUser'>申请</a>解锁!"),
 
-
     ;
 
     /**

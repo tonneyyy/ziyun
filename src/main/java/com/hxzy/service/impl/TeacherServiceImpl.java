@@ -13,10 +13,14 @@ import com.hxzy.entity.Major;
 import com.hxzy.entity.Teacher;
 import com.hxzy.mapper.MajorMapper;
 import com.hxzy.mapper.TeacherMapper;
+import com.hxzy.service.MenuService;
 import com.hxzy.service.TeacherService;
+import com.hxzy.vo.MenuVO;
 import com.hxzy.vo.ResultData;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 /**
  * describe:
@@ -34,17 +39,19 @@ import java.util.List;
 @Log4j2
 @Service
 public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> implements TeacherService{
-    @Autowired
     private TeacherMapper teacherMapper;
-
-    @Autowired
-    private MajorMapper majorMapper;
 
     @Autowired
     public void setTeacherMapper(TeacherMapper teacherMapper) {
         this.teacherMapper = teacherMapper;
         super.setBaseMapper(teacherMapper);
     }
+
+    @Autowired
+    private MajorMapper majorMapper;
+
+    @Autowired
+    private MenuService menuService;
 
     /**
      * 判断是否有该名称
@@ -107,8 +114,6 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
         }
     }
 
-
-
     @Override
     public ResultData searchPage(PageSearch pageSearch) {
 
@@ -147,4 +152,32 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher,Integer> impleme
         resultData.setTotal(pg.getTotal());
         return resultData;
     }
+
+
+    @Override
+    public Teacher findByName(String name) {
+        return this.teacherMapper.findByName(name);
+    }
+
+    @Override
+    public Set<String> findTeacherOwnRoleAuthority(int teacherId) {
+        return this.teacherMapper.findTeacherOwnRoleAuthority(teacherId);
+    }
+
+    @Override
+    public Set<String> findTeacherOwnMenuAuthority(int teacherId) {
+        return this.teacherMapper.findTeacherOwnMenuAuthority(teacherId);
+    }
+
+    /**
+     * 加载用户菜单
+     */
+    @Override
+    public void loadTeacherMenu(Session session) {
+        Teacher currentTeacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+        session.setAttribute("currentTeacher",currentTeacher);
+        List<MenuVO> currentTeacherMenu = menuService.findTeacherMenu(currentTeacher.getId());
+        session.setAttribute("currentTeacherMenu",currentTeacherMenu);
+    }
+
 }

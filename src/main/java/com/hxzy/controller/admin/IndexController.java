@@ -1,14 +1,15 @@
 package com.hxzy.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
+import com.hxzy.service.TeacherService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
+import org.apache.shiro.session.Session;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -24,12 +25,14 @@ import java.util.Random;
 @RequestMapping(value = "/admin")
 @Controller
 public class IndexController {
+    @Autowired
+    private TeacherService teacherService;
 
     //首页
     @GetMapping(value = {"/", "/index"})
-    public String index(HttpSession session){
-
-
+    public String index(){
+        Session session= SecurityUtils.getSubject().getSession();
+        teacherService.loadTeacherMenu(session);
 
         return "admin/index";
     }

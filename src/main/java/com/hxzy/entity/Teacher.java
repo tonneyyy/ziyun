@@ -6,12 +6,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
 @Setter
 @ToString
-public class Teacher {
+public class Teacher implements Serializable {
     private Integer id;
 
     private String name;

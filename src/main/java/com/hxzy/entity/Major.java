@@ -3,6 +3,8 @@ package com.hxzy.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @author
  * @date 20191115下午 4:54
@@ -10,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Major {
+public class Major implements Serializable {
 
     private Integer id;
 

@@ -1,8 +1,8 @@
 ailibaba:
   durid:
-    url: jdbc:mysql://192.168.20.15:3306/ziyun?serverTimezone=UTC&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.20.89:3306/ziyun?serverTimezone=UTC&characterEncoding=utf-8
     username: root
-    password: zzz123
+    password: root
     maxActive: 20
     maxWait: 10000
     minIdle: 3
@@ -17,6 +17,12 @@ spring:
     password: rootpass
     timeout: 3000
     port: 6379
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
   servlet:
     multipart:
       max-file-size: 20MB

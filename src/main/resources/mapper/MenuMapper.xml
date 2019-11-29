@@ -90,16 +90,39 @@
     order by  parentId ,sort desc ,id
   </select>
 
-  <select id="loadUserMenu" parameterType="int" resultType="com.hxzy.entity.Menu">
+  <select id="findTeacherMenu" parameterType="int" resultType="com.hxzy.entity.Menu">
     SELECT
-        m.id,    m.menuName,    m.actionName,    m.authority,    m.parentId
+    sys_menu.id,
+    sys_menu.menuName,
+    sys_menu.actionName,
+    sys_menu.authority,
+    sys_menu.parentId,
+    sys_menu.sort
     FROM
-      sys_role_user AS sru
-      INNER JOIN sys_role_menu AS srm ON sru.roleId = srm.roleId
-      INNER JOIN sys_menu AS m ON srm.menuId = m.id
-      where sru.userId=#{userId}  and m.menuLevel &lt;=2  and m.display=1
-      order by m.sort desc , m.parentId,m.id
+    sys_role_teacher
+    INNER JOIN sys_role_menu ON sys_role_teacher.roleId = sys_role_menu.roleId
+    INNER JOIN sys_menu ON sys_role_menu.menuId = sys_menu.id
+    where sys_role_teacher.teacherId=#{teacherId}  and sys_menu.menuLevel &lt;= 2
+    order by sys_menu.sort desc ,parentId ,id
+  </select>
 
+  <select id="findTeacherOwnRoleAuthority" parameterType="int" resultType="java.lang.String">
+    SELECT
+    r.authority
+    FROM
+    sys_role_teacher AS ru
+    INNER JOIN sys_role AS r ON ru.roleId = r.id
+    where r.state=1 and ru.teacherId=#{teacherId}
+  </select>
+  <select id="findTeacherOwnMenuAuthority" parameterType="int" resultType="java.lang.String">
+    SELECT  m.authority FROM sys_role AS r
+    INNER JOIN sys_role_teacher AS ru ON ru.roleId = r.id
+    INNER JOIN sys_role_menu AS rm ON r.id = rm.roleId
+    INNER JOIN sys_menu AS m ON rm.menuId = m.id
+    WHERE r.state = 1
+    AND ru.teacherId = #{teacherId}
+    AND m.authority IS NOT null
+    ORDER BY m.authority
   </select>
 
 

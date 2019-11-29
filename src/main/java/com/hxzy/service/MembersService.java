@@ -1,7 +1,10 @@
 package com.hxzy.service;
 
+import com.hxzy.common.bean.ResponseMessage;
 import com.hxzy.common.service.BaseService;
 import com.hxzy.entity.Members;
+
+import java.util.Set;
 
 /**
  * @author lz
@@ -9,4 +12,7 @@ import com.hxzy.entity.Members;
  * @comment 描述
  */
 public interface MembersService extends BaseService<Members,Integer> {
+
+    ResponseMessage findAll();
+
 }

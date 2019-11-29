@@ -3,9 +3,11 @@ package com.hxzy.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class Role {
+public class Role implements Serializable {
     private Integer id;
 
     private String rolename;

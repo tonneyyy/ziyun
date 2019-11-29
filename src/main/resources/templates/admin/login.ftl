@@ -11,22 +11,22 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     
-    <link href="${ctx }/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="${ctx }/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="${ctx }/static/css/animate.css" rel="stylesheet">
+    <link href="${ctx}/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctx}/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctx}/static/css/animate.css" rel="stylesheet">
     <!-- bootstrap-validator验证 -->
-     <link href="${ctx }/static/js/plugins/validator/css/bootstrapValidator.css" rel="stylesheet">
+     <link href="${ctx}/static/js/plugins/validator/css/bootstrapValidator.css" rel="stylesheet">
     <!-- bootstrap-dialog 模态框框 -->
-     <link href="${ctx }/static/js/plugins/dialog/css/bootstrap-dialog.css" rel="stylesheet">
+     <link href="${ctx}/static/js/plugins/dialog/css/bootstrap-dialog.css" rel="stylesheet">
 
 
     <!--  滑动验证 -->
-    <link href="${ctx }/static/js/plugins/verify/css/verify.css" rel="stylesheet">
+    <link href="${ctx}/static/js/plugins/verify/css/verify.css" rel="stylesheet">
     
-    <link href="${ctx }/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctx}/static/css/style.css?v=4.1.0" rel="stylesheet">
     
     
-    <link href="${ctx }/static/css/login.css" rel="stylesheet">
+    <link href="${ctx}/static/css/login.css" rel="stylesheet">
     
     <script>
        /*解决在iframe中显示登录界面的问题 */ 
@@ -38,7 +38,7 @@
 
 </head>
 
-<body class="signin" data-project="${ctx }" >
+<body class="signin" data-project="${ctx}">
     <div class="signinpanel">
         <div class="row">
             <div class="col-sm-7">
@@ -75,7 +75,7 @@
 					       </div>
 					 </div>
 					  
-                    <a href="${ctx}/admin/findPwd" target="_blank">忘记密码了？</a>
+                    <a href="#" target="_blank">忘记密码了？</a>
                     <input type="button" id="btnLogin" class="btn btn-success btn-block" value="登录" >
 
 
@@ -102,18 +102,18 @@
 </body>
 
  <!-- 全局js -->
-    <script src="${ctx }/static/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${ctx }/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctx}/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${ctx}/static/js/bootstrap.min.js?v=3.3.6"></script>
      
      <!-- bootstrap-validator验证 -->
-     <script src="${ctx }/static/js/plugins/validator/js/bootstrapValidator.js"></script>
-    <script src="${ctx }/static/js/plugins/validator/js/language/zh_CN.js"></script>
+     <script src="${ctx}/static/js/plugins/validator/js/bootstrapValidator.js"></script>
+    <script src="${ctx}/static/js/plugins/validator/js/language/zh_CN.js"></script>
     
     <!-- bootstrap-dialog模态框 -->
-     <script src="${ctx }/static/js/plugins/dialog/js/bootstrap-dialog.min.js"></script>
+     <script src="${ctx}/static/js/plugins/dialog/js/bootstrap-dialog.min.js"></script>
 
     <!-- 滑动验证-->
-    <script src="${ctx }/static/js/plugins/verify/js/verify.js"></script>
+    <script src="${ctx}/static/js/plugins/verify/js/verify.js"></script>
     
-    <script src="${ctx }/static/js/admin/login.js?v=1.0.0"></script>
+    <script src="${ctx}/static/js/admin/login.js?v=1.0.0"></script>
 </html>

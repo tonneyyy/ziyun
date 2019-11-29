@@ -3,13 +3,15 @@ package com.hxzy.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * sys_data
  * @author 
  */
 @Getter
 @Setter
-public class Data {
+public class Data  implements Serializable {
     private Integer id;
 
     /**
