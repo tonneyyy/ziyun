@@ -3,6 +3,7 @@ package com.hxzy.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class MenuVO {
+public class MenuVO implements Serializable {
     private Integer id;
 
     private String menuName;

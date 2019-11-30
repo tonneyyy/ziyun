@@ -43,12 +43,6 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
         //2、最终要完成的就要把数据库值，变为我们想要的二级节点
         List<MenuVO>  newList=new ArrayList<>();
 
-        //1、读取parentId=0
-        /*  for(Menu  p : ownMenuList){
-            if(p.getParentid()==0){
-
-            }
-        }*/
         ownMenuList.stream().filter(p->p.getParentId()==0).forEach(p->{
              //自己组装值
             MenuVO one=new MenuVO();
@@ -58,10 +52,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer> implements Me
             one.setMenuName(p.getMenuName());
             //做第二级 遍历所有的数据库 .parentId=14( p.getId())，装到 one对象的 List<MenuVO> childrens
             loadRecursion(one,ownMenuList);
-
-
             newList.add(one);
-
         });
 
         return newList;

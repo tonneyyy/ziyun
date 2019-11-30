@@ -1,34 +1,33 @@
 <#assign ctx="${request.contextPath}">
+
+<#list currentTeacherMenu! as m>
 <li class="active">
-    <a href="#">
-        <i class="fa fa-home"></i>
-        <span class="nav-label">权限管理</span> <span class="fa arrow">
+
+    <a>
+        <#if m.menuName == "系统管理">
+            <i class="fa fa-home"></i>
+            <#elseif m.menuName="权限管理">
+                <i class="fa fa-shield"></i>
+            <#elseif m.menuName="会员管理">
+                <i class="fa fa-male"></i>
+            <#elseif m.menuName="学生管理">
+                <i class="fa fa-user"></i>
+            <#elseif m.menuName="教师管理">
+                <i class="fa fa-graduation-cap"></i>
+            <#else >
+        </#if>
+        <span class="nav-label">${m.menuName!}</span> <span class="fa arrow">
 	  </span>
     </a>
 
     <ul class="nav nav-second-level">
-
+        <#list m.childrens! as c>
         <li>
-            <a class="J_menuItem" href="${ctx}/admin/role/search" data-index="1">角色管理</a>
+            <a class="J_menuItem" href="${ctx}${c.actionName!}" data-index="1">${c.menuName!}</a>
         </li>
-        <li>
-            <a class="J_menuItem" href="${ctx}/admin/teacher/search" data-index="2">教师管理</a>
-        </li>
-        <li>
-            <a class="J_menuItem" href="${ctx}/admin/menu/search" data-index="2">菜单管理</a>
-        </li>
-
-        <li>
-            <a class="J_menuItem" href="${ctx}/admin/student/search" data-index="2">学生管理</a>
-        </li>
-        <li>
-            <a class="J_menuItem" href="${ctx}/admin/classes/search" data-index="2">班级管理</a>
-        </li>
-        <li>
-            <a class="J_menuItem" href="${ctx}/admin/major/search" data-index="2">专业管理</a>
-        </li>
-
+        </#list>
     </ul>
+
 </li>
 
-
+</#list>

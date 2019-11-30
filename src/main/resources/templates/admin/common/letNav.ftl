@@ -12,7 +12,7 @@
                             <span><img alt="image" class="img-circle" src="${ctx }/static/img/profile_small.jpg" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">当前用户 </strong></span>
+                               <span class="block m-t-xs"><strong class="font-bold">${currentTeacher.name!}</strong></span>
                                 <span class="text-muted text-xs block"> <b class="caret"></b></span>
                                 </span>
                             </a>

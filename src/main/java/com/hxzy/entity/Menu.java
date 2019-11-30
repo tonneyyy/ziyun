@@ -16,16 +16,13 @@ public class Menu implements Serializable {
 
     private String actionName;
 
-
     private String authority;
-
 
     private Integer parentId;
 
     private Integer sort;
 
     private Integer state;
-
 
 }
 
