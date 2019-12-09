@@ -32,8 +32,8 @@ public class ShiroConfig {
     @Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
-        redisManager.setHost("192.168.20.165:6379");
-        redisManager.setPassword("rootpass");
+        redisManager.setHost("161.117.84.33:6379");
+        redisManager.setPassword("zzz123");
         return redisManager;
     }
 

@@ -13,8 +13,8 @@ ailibaba:
 
 spring:
   redis:
-    host: 192.168.20.165
-    password: rootpass
+    host: 161.117.84.33
+    password: zzz123
     timeout: 3000
     port: 6379
     jedis:
@@ -46,4 +46,4 @@ logging:
 # 配置虚拟图片服务器
 imgServer:
   url: /imgServer/
-  filePath: E:/imgserver/
+  filePath: F:/imgserver/
