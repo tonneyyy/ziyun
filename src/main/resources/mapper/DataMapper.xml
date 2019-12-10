@@ -52,4 +52,10 @@
   <select id="searchPage" parameterType="com.hxzy.common.search.PageSearch" resultType="com.hxzy.entity.Data">
     select * from sys_data  order by id
   </select>
+
+  <select id="findData" parameterType="int" resultType="com.hxzy.entity.Data">
+    SELECT * FROM sys_data
+    where types= #{id,jdbcType=INTEGER} and state=1
+  </select>
+
 </mapper>

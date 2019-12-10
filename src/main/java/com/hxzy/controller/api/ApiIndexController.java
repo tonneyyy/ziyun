@@ -45,6 +45,8 @@ public class ApiIndexController {
                vo.setLabel(  rd.nextInt(100) %2==0? "原创":"临摹");
                vo.setTitle("平面设计内容"+i);
                vo.setCover("http://localhost:8080/imgServer/xyt_"+(rd.nextInt(8)+1)+".jpg");
+               //用户头像
+               vo.setPortrait( rd.nextInt(2)==0?"http://localhost:8080/imgServer/conve.jpg":"http://localhost:8080/imgServer/zoey1.jpg");
                arrVO.add(vo);
            }
            worksVO.setData(arrVO);

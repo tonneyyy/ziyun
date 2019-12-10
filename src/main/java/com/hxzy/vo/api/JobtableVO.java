@@ -30,5 +30,8 @@ public class JobtableVO {
     private Integer works=0;
     //粉丝数0
    private Integer fans=0;
+   //用户头像
+   private String portrait;
+
 
 }
