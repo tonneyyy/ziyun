@@ -47,3 +47,4 @@ logging:
 imgServer:
   url: /imgServer/
   filePath: F:/imgserver/
+  host: http://192.168.20.89:8080
