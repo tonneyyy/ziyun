@@ -13,7 +13,7 @@ public enum ResponseCodeEnum {
     /*用户模块*/
     LoginFailed(1000001,"登录失败"),
     USERNAME_PASSWORD_ERROR(100002,"用户名或密码错误!"),
-    USERNAME_Locked(100003,"用户账户被锁定，请<a href='/admin/findUser'>申请</a>解锁!"),
+    USERNAME_Locked(100003,"用户账户被锁定!"),
 
     ;
 

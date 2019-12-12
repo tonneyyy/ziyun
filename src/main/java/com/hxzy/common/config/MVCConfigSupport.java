@@ -70,8 +70,9 @@ public class MVCConfigSupport extends WebMvcConfigurationSupport {
     //自定义拦截器
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
+
         super.addInterceptors(registry);
-    }
+}
 
 
     //支持跨域访问

@@ -11,4 +11,5 @@ public interface MembersMapper extends BaseMapper<Members,Integer> {
     List<Members> findAll();
     Members findByLoginName(String loginName);
 
+
 }
