@@ -31,6 +31,7 @@ public class ApiLoginController {
     @ResponseBody
     @PostMapping(value = "/login")
     public ResponseMessage login(Members members,@RequestParam(value="loginType",defaultValue = "1") Integer loginType){
+
         LoginTypeEnum  loginTypeEnum=loginType==1? LoginTypeEnum.USE_PASSWORD : LoginTypeEnum.USE_MOBILE;
 
         return this.membersService.login(members,loginTypeEnum);

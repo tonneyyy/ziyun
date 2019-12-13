@@ -75,9 +75,11 @@ public class AccountLogin implements MemberLogin {
              this.membersMapper.updateSelective(updateMember);
 
              //把值发给前端
-             Map<String,String> map=new HashMap<>();
+             Map<String,Object> map=new HashMap<>();
              map.put("token", uuid);
-             return new ResponseMessage(ResponseCodeEnum.SUCCESS,map);
+             //发送用户前端存储信息
+             map.put("userInfo",dbMember);
+             return new ResponseMessage(ResponseCodeEnum.LoginSuccess,map);
          }else{
              //redis写入值失败的
              log.error("登录成功后-redis写入值失败");

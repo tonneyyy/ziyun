@@ -71,6 +71,8 @@ public class MVCConfigSupport extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
 
+        //添加 /api请求的拦截器springmvc的操作 新建一个类 实现AbstractInterceptor接口
+
         super.addInterceptors(registry);
 }
 
